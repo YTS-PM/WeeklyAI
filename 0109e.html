@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trend Weekly - 2026 Jan W2</title>
+    <style>
+        /* =================Global Reset & Navigation================= */
+        :root {
+            /* Page 1: War Room Red Theme */
+            --p1-primary: #b71c1c; 
+            --p1-accent: #d32f2f;
+            --p1-bg: #f8f9fa;
+            --p1-card-bg: #ffffff;
+            --p1-text: #212121;
+            
+            /* Page 2: Tech Blue Theme */
+            --p2-primary-bg: #f8fafc;
+            --p2-header-bg: #0f172a;
+            --p2-card-bg: #ffffff;
+            --p2-text-main: #334155;
+            --p2-accent-tw: #059669; 
+            --p2-accent-global: #2563eb;
+            --p2-timeline-line: #cbd5e1;
+            --p2-insight-bg: #fffbeb;
+            --p2-insight-border: #f59e0b;
+
+            /* Page 3: Workflow Purple/Dark Theme */
+            --p3-bg: #1a1a2e;
+            --p3-card-bg: #16213e;
+            --p3-accent: #0f3460;
+            --p3-highlight: #e94560;
+            --p3-text: #e0e0e0;
+            --p3-step-line: #533483;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "PingFang TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f0f2f5;
+            scroll-behavior: smooth;
+        }
+
+        /* Top Navigation Bar */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 12px 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background: #ffffff;
+            color: #555;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-btn:hover { background-color: #f5f5f5; }
+
+        .nav-btn.active {
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Active Colors per Page */
+        .nav-btn.active[data-target="view-weekly"] { background: linear-gradient(135deg, #b71c1c, #d32f2f); }
+        .nav-btn.active[data-target="view-competitor"] { background: linear-gradient(135deg, #0f172a, #334155); }
+        .nav-btn.active[data-target="view-workflow"] { background: linear-gradient(135deg, #533483, #e94560); }
+
+        /* View Toggle Logic */
+        .view-section {
+            display: none;
+            padding-bottom: 50px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .view-section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =================PAGE 1: AI Trend Weekly (Red UI)================= */
+        #view-weekly .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        #view-weekly .banner { background: linear-gradient(135deg, #8e0000 0%, #b71c1c 100%); color: white; padding: 40px 30px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 10px 25px -5px rgba(183, 28, 28, 0.3); position: relative; overflow: hidden; border-left: 8px solid #ff5252; }
+        #view-weekly .banner h1 { margin: 0; font-size: 32px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+        #view-weekly .banner p { margin: 8px 0 0 0; font-size: 16px; opacity: 0.9; font-weight: 400; letter-spacing: 0.5px; }
+        #view-weekly .trend-summary { background: white; border-radius: 12px; padding: 25px 30px; margin-bottom: 30px; border-top: 4px solid var(--p1-primary); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        #view-weekly .section-header { font-size: 18px; font-weight: 800; color: var(--p1-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        #view-weekly .summary-text { font-size: 16px; line-height: 1.7; color: #333; text-align: justify; margin: 0; }
+        #view-weekly .exec-analysis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
+        #view-weekly .analysis-card { background: white; border-radius: 12px; padding: 25px; border-top: 4px solid var(--p1-primary); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        #view-weekly .analysis-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        #view-weekly .analysis-title { font-size: 16px; font-weight: 700; color: var(--p1-primary); margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        #view-weekly .analysis-content ul { padding-left: 20px; margin: 0; }
+        #view-weekly .analysis-content li { margin-bottom: 12px; font-size: 15px; color: #444; line-height: 1.6; }
+        #view-weekly .analysis-link { color: #0056b3; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; cursor: pointer; font-weight: 600; transition: all 0.2s; background-color: rgba(0, 86, 179, 0.05); padding: 0 4px; border-radius: 3px; }
+        #view-weekly .analysis-link:hover { background-color: #0056b3; color: white; text-decoration: none; }
+        #view-weekly .analysis-link::after { content: " ↴"; font-size: 0.8em; }
+        #view-weekly .news-section { display: grid; grid-template-columns: 350px 1fr; gap: 25px; align-items: start; scroll-margin-top: 80px; }
+        #view-weekly .news-list { background: white; border-radius: 12px; padding: 10px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border-top: 4px solid var(--p1-primary); max-height: 800px; overflow-y: auto; }
+        #view-weekly .news-item { padding: 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s; border-radius: 8px; margin-bottom: 5px; }
+        #view-weekly .news-item:hover { background-color: #fff5f5; }
+        #view-weekly .news-item.active { background-color: #ffebee; border-left: 3px solid var(--p1-primary); }
+        #view-weekly .news-item-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
+        #view-weekly .news-num { font-weight: 800; color: var(--p1-primary); font-size: 14px; }
+        #view-weekly .news-list-title { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 5px; line-height: 1.4; }
+        #view-weekly .news-list-summary { font-size: 12px; color: #666; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; }
+        #view-weekly .tab-content { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border-top: 4px solid var(--p1-primary); min-height: 400px; display: none; animation: fadeIn 0.3s ease; position: relative; }
+        #view-weekly .tab-content.active { display: block; }
+        #view-weekly .detail-header { border-bottom: 2px solid #f0f0f0; padding-bottom: 20px; margin-bottom: 20px; }
+        #view-weekly .detail-title { font-size: 24px; font-weight: 700; color: #222; margin: 0 0 10px 0; line-height: 1.3; }
+        #view-weekly .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        #view-weekly .tag { background: #f1f1f1; color: #555; padding: 4px 10px; border-radius: 15px; font-size: 12px; font-weight: 600; }
+        #view-weekly .detail-section { margin-bottom: 25px; }
+        #view-weekly .section-label { font-size: 13px; font-weight: 800; color: var(--p1-primary); text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        #view-weekly .highlight-box { background: #fff8f8; border-left: 4px solid var(--p1-primary); padding: 15px; border-radius: 0 4px 4px 0; font-size: 15px; color: #333; line-height: 1.6; font-weight: 500; }
+        #view-weekly .detail-list li { margin-bottom: 8px; font-size: 15px; color: #444; line-height: 1.6; }
+        #view-weekly .strategy-box { background: linear-gradient(to right, #fffaf0, #fff); padding: 20px; border-radius: 8px; border: 1px solid #eee; }
+        #view-weekly .strategy-text { font-size: 15px; color: #444; line-height: 1.7; text-align: justify; }
+        #view-weekly .read-source-btn { display: inline-block; margin-top: 20px; padding: 10px 20px; border: 1px solid #ddd; border-radius: 6px; background-color: #fff; color: #666; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; float: right; }
+        #view-weekly .read-source-btn:hover { border-color: var(--p1-primary); color: var(--p1-primary); background-color: #fff5f5; }
+        #view-weekly .tab-content::after { content: ""; display: table; clear: both; }
+
+        @media (max-width: 900px) {
+            #view-weekly .exec-analysis { grid-template-columns: 1fr; }
+            #view-weekly .news-section { grid-template-columns: 1fr; }
+            #view-weekly .news-list { max-height: 300px; }
+        }
+
+        /* =================PAGE 2: Competitor Watch (Blue UI)================= */
+        #view-competitor .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; position: relative; }
+        #view-competitor header { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; text-align: center; padding: 40px 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-radius: 8px; margin-bottom: 20px; }
+        #view-competitor h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: 0.5px; }
+        #view-competitor .subtitle { margin-top: 10px; opacity: 0.9; font-size: 14px; font-weight: 300; }
+        #view-competitor .filter-section { background: white; padding: 15px; border-radius: 8px; margin-bottom: 30px; display: flex; justify-content: center; align-items: center; gap: 15px; border: 1px solid #e2e8f0; }
+        #view-competitor .container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background-color: var(--p2-timeline-line); transform: translateX(-50%); border-radius: 2px; }
+        #view-competitor .columns-wrapper { display: flex; justify-content: space-between; }
+        #view-competitor .column { width: 47%; position: relative; }
+        #view-competitor .col-header { text-align: center; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 40px; padding: 12px; border-radius: 8px; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: relative; z-index: 10; border-bottom: 4px solid; }
+        #view-competitor .tw-header { color: var(--p2-accent-tw); border-color: var(--p2-accent-tw); }
+        #view-competitor .global-header { color: var(--p2-accent-global); border-color: var(--p2-accent-global); }
+        #view-competitor .card { background: var(--p2-card-bg); border-radius: 12px; padding: 24px; margin-bottom: 40px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid var(--p2-timeline-line); position: relative; transition: transform 0.2s; }
+        #view-competitor .card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        #view-competitor .tw-col .card { border-top: 5px solid var(--p2-accent-tw); }
+        #view-competitor .global-col .card { border-top: 5px solid var(--p2-accent-global); }
+        #view-competitor .card::after { content: ''; position: absolute; top: 30px; width: 16px; height: 16px; background: white; border-radius: 50%; z-index: 5; }
+        #view-competitor .tw-col .card::after { right: -44px; border: 4px solid var(--p2-accent-tw); }
+        #view-competitor .global-col .card::after { left: -44px; border: 4px solid var(--p2-accent-global); }
+        #view-competitor .meta-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 12px; color: #64748b; }
+        #view-competitor .date-badge { background-color: #f1f5f9; padding: 4px 10px; border-radius: 20px; font-weight: 700; }
+        #view-competitor .company { display: block; font-size: 13px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px; }
+        #view-competitor .product-title { margin: 0 0 10px 0; font-size: 18px; font-weight: 700; color: #1e293b; line-height: 1.4; }
+        #view-competitor .user-case { font-size: 15px; color: #475569; margin-bottom: 15px; line-height: 1.6; }
+        #view-competitor .insight-box { background-color: var(--p2-insight-bg); border-left: 4px solid var(--p2-insight-border); padding: 15px; border-radius: 0 4px 4px 0; margin-bottom: 15px; }
+        #view-competitor .insight-title { display: block; font-size: 11px; font-weight: 800; color: #b45309; text-transform: uppercase; margin-bottom: 5px; }
+        #view-competitor .insight-text { margin: 0; font-size: 13px; color: #78350f; }
+        #view-competitor .source-link { display: inline-flex; align-items: center; font-size: 12px; color: #64748b; text-decoration: none; border-top: 1px solid #f1f5f9; padding-top: 12px; width: 100%; }
+        #view-competitor .source-link:hover { color: var(--p2-accent-global); text-decoration: underline; }
+        #view-competitor .hidden { display: none !important; }
+        @media (max-width: 768px) {
+            #view-competitor .container::before { display: none; }
+            #view-competitor .columns-wrapper { flex-direction: column; }
+            #view-competitor .column { width: 100%; }
+            #view-competitor .card::after { display: none; }
+        }
+
+        /* =================PAGE 3: Collaboration Workflow (New)================= */
+        #view-workflow {
+            background-color: var(--p3-bg);
+            color: var(--p3-text);
+            min-height: 100vh;
+            padding-top: 40px;
+        }
+
+        #view-workflow .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        #view-workflow .workflow-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        #view-workflow .workflow-header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(to right, #e94560, #a3a1fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        #view-workflow .workflow-header p {
+            font-size: 18px;
+            color: #a0a0a0;
+        }
+
+        #view-workflow .workflow-steps {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        /* Vertical Line */
+        #view-workflow .workflow-steps::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--p3-step-line);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            z-index: 0;
+        }
+
+        .step-card {
+            background: var(--p3-card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .step-badge {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--p3-highlight);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(233, 69, 96, 0.4);
+            text-transform: uppercase;
+        }
+
+        .step-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .prompt-container {
+            background: #0f3460;
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+            margin-top: 15px;
+            border: 1px solid #533483;
+        }
+
+        .prompt-label {
+            font-size: 12px;
+            color: #a3a1fc;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .prompt-text {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--p3-highlight);
+        }
+
+        .interaction-box {
+            text-align: center;
+            background: rgba(83, 52, 131, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid var(--p3-highlight);
+        }
+
+        .interaction-text {
+            color: #fff;
+            font-style: italic;
+        }
+
+        /* Role Matrix Table */
+        .role-matrix {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .role-matrix th, .role-matrix td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .role-matrix th {
+            color: var(--p3-highlight);
+            font-size: 16px;
+            border-bottom: 2px solid var(--p3-highlight);
+        }
+
+        .role-matrix td {
+            color: #ccc;
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            #view-workflow .workflow-steps::before { left: 20px; }
+            .step-card { margin-left: 40px; width: auto; }
+            .step-badge { left: 0; transform: none; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="nav-container">
+    <button class="nav-btn active" data-target="view-weekly" onclick="switchView('weekly')">
+        <span>📊</span> AI Trend Weekly
+    </button>
+    <button class="nav-btn" data-target="view-competitor" onclick="switchView('competitor')">
+        <span>🌍</span> 同業追蹤 Watch
+    </button>
+    <!-- <button class="nav-btn" data-target="view-workflow" onclick="switchView('workflow')">
+        <span>⚙️</span> 協作流程 Workflow
+    </button> -->
+</div>
+
+<div id="view-weekly" class="view-section active">
+    <div class="container">
+        <div class="banner">
+            <h1>AI Trend Weekly</h1>
+            <p>洞察・趨勢 | 2026 年 01 月 第 2 週</p>
+        </div>
+        <div class="trend-summary">
+            <div class="section-header"><span>📉</span> 本週趨勢摘要 (Executive Summary)</div>
+            <p class="summary-text">CES 2026 正式定調 AI 產業的「硬體落地」與「代理人元年」。Nvidia 與華碩在 CES 展示了 AI 從雲端走向邊緣與工廠的基礎建設實力，證明 AI 已脫離玩具階段。與此同時，Anthropic 的百億融資與 OpenAI 轉型「個人超級助理」及進軍醫療，顯示軟體端正從單純的對話模型轉向具有執行力的 Agentic AI。資本市場的整合（軟銀入股、巨頭融資）意味著 2026 年將是強者恆強、技術垂直深耕的關鍵分水嶺。</p>
+        </div>
+        <div class="exec-analysis">
+            <div class="analysis-card">
+                <div class="analysis-title">Agentic AI：從聊天機器人到超級助理</div>
+                <div class="analysis-content">
+                    <ul>
+                        <li>OpenAI 2026 戰略明確指向「個人超級助理」，不再只是被動回答，而是能主動執行任務，這將重新定義使用者與數位服務的入口。<a onclick="jumpToNews(7)" class="analysis-link">詳見新聞</a></li>
+                        <li>蘋果的 AI 智慧眼鏡路線圖顯示，穿戴式裝置將成為 Agentic AI 的最佳載體，取代手機成為下一代感知中心。<a onclick="jumpToNews(8)" class="analysis-link">詳見新聞</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="analysis-card">
+                <div class="analysis-title">基礎建設 2.0：工廠與邊緣的算力革命</div>
+                <div class="analysis-content">
+                    <ul>
+                        <li>輝達與聯想推出的「吉瓦級 AI 工廠」計畫，標誌著算力建設已達到國家基礎設施等級，企業私有 AI 算力將成為標配。<a onclick="jumpToNews(6)" class="analysis-link">詳見新聞</a></li>
+                        <li>華碩發表的桌上型 AI 超級電腦，將強大的推理能力下放到邊緣端，解決了延遲與隱私問題，為企業落地鋪平道路。<a onclick="jumpToNews(2)" class="analysis-link">詳見新聞</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="analysis-card">
+                <div class="analysis-title">資本寒冬下的獨角獸盛宴</div>
+                <div class="analysis-content">
+                    <ul>
+                        <li>Anthropic 成功融資百億美元與軟銀大舉入股 OpenAI，顯示資金正瘋狂向頭部模型商集中，中小型模型商的生存空間將被進一步擠壓。<a onclick="jumpToNews(4)" class="analysis-link">詳見新聞</a></li>
+                        <li>高估值的背後是對「垂直變現」的期待，如 OpenAI 進軍醫療領域，證明通用模型必須找到高價值的垂直場景才能支撐股價。<a onclick="jumpToNews(5)" class="analysis-link">詳見新聞</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="news-section" id="news-section-anchor">
+            <div class="news-list">
+                <div class="news-item active" onclick="openTab(1)"><div class="news-item-header"><span class="news-num">01.</span></div><div class="news-list-title">黃仁勳 CES 專講說了什麼？最新 Rubin 晶片亮點</div><div class="news-list-summary">NVIDIA 下一代 Rubin 平台細節曝光，強調 AI 算力即未來的數位貨幣。</div></div>
+                <div class="news-item" onclick="openTab(2)"><div class="news-item-header"><span class="news-num">02.</span></div><div class="news-list-title">華碩 CES 發表首款桌上型 AI 超級電腦 ET900N G3</div><div class="news-list-summary">將企業級算力微縮至桌上型尺寸，賦能邊緣運算與金融本地端模型訓練。</div></div>
+                <div class="news-item" onclick="openTab(3)"><div class="news-item-header"><span class="news-num">03.</span></div><div class="news-list-title">CES 2026 趨勢揭秘：AI 從「酷炫玩具」進化為「基礎建設」</div><div class="news-list-summary">AI 不再是酷炫玩具，而是如同水電般的基礎設施，滲透至所有消費電子。</div></div>
+                <div class="news-item" onclick="openTab(4)"><div class="news-item-header"><span class="news-num">04.</span></div><div class="news-list-title">Anthropic 擬融資百億美元，估值飆升至 3,500 億美元</div><div class="news-list-summary">生成式 AI 市場持續狂熱，Anthropic 估值達 3,500 億美元，挑戰 OpenAI。</div></div>
+                <div class="news-item" onclick="openTab(5)"><div class="news-item-header"><span class="news-num">05.</span></div><div class="news-list-title">OpenAI 報告：AI 已成為醫療保健的「非正式前門」</div><div class="news-list-summary">報告顯示大眾日益依賴 AI 進行初步醫療諮詢，重塑醫病關係入口。</div></div>
+                <div class="news-item" onclick="openTab(6)"><div class="news-item-header"><span class="news-num">06.</span></div><div class="news-list-title">輝達與聯想發表「吉瓦級 (Gigawatt) AI 工廠」計畫</div><div class="news-list-summary">針對企業級大規模 AI 運算需求，推出高能效、高密度的算力工廠解決方案。</div></div>
+                <div class="news-item" onclick="openTab(7)"><div class="news-item-header"><span class="news-num">07.</span></div><div class="news-list-title">OpenAI 策略轉型：ChatGPT 2026 將成為「個人超級助理」</div><div class="news-list-summary">Fidji Simo 揭露新戰略，從聊天機器人轉型為能自主執行複雜任務的 Agent。</div></div>
+                <div class="news-item" onclick="openTab(8)"><div class="news-item-header"><span class="news-num">08.</span></div><div class="news-list-title">蘋果 2026 路線圖：AI 智慧眼鏡將取代全功能 AR 設備</div><div class="news-list-summary">蘋果計畫推出輕量化 AI 眼鏡，結合視覺辨識與語音助理，取代笨重頭盔。</div></div>
+                <div class="news-item" onclick="openTab(9)"><div class="news-item-header"><span class="news-num">09.</span></div><div class="news-list-title">軟銀完成對 OpenAI 410 億美元投資，取得 11% 股權</div><div class="news-list-summary">軟銀取得 11% 股權，進一步鞏固其在 AI 基礎建設與應用端的資本影響力。</div></div>
+            </div>
+            
+            <div id="tab-content-container">
+                <div id="tab-1" class="tab-content active">
+                    <div class="detail-header"><h2 class="detail-title">黃仁勳 CES 專講說了什麼？最新 Rubin 晶片亮點</h2><div class="tags"><span class="tag">#硬體晶片</span><span class="tag">#CES2026</span></div></div>
+                    <div class="detail-section"><div class="section-label">⚡ 重點速報</div><div class="highlight-box">黃仁勳在 CES 2026 專題演講中，正式揭露下一代「Rubin」AI 晶片平台細節。他強調 AI 已成為新的工業革命引擎，算力即是未來的數位貨幣。Rubin 平台不只提升運算速度，更著重於能效比與大規模集群的互連能力，直接點名台系供應鏈將是最大受惠者。</div></div>
+                    <div class="detail-section"><div class="section-label">📊 關鍵細節</div><ul class="detail-list"><li>Rubin 架構：採用新一代製程，記憶體頻寬較 Blackwell 提升 2 倍。</li><li>台鏈受惠：明確提及台積電（先進封裝）、廣達（伺服器組裝）、鴻海（液冷散熱技術）。</li><li>時程：預計於 2026 下半年開始小量出貨，2027 年全面放量。</li></ul></div>
+                    <div class="detail-section"><div class="section-label">💡 策略解讀</div><div class="strategy-box"><p class="strategy-text">NVIDIA 透過 Rubin 平台持續墊高護城河，迫使競爭對手（AMD, Intel）陷入追趕苦戰。對金融業而言，這暗示「算力成本」在短期內難以下降，但模型能力將大幅躍升，需評估基礎建設投資的折舊風險與技術迭代速度。</p></div></div>
+                    <a href="https://money.udn.com/money/story/124512/9248246" target="_blank" class="read-source-btn">閱讀原始文章 (Money UDN) ↗</a>
+                </div>
+
+                <div id="tab-2" class="tab-content">
+                    <div class="detail-header"><h2 class="detail-title">華碩 CES 發表首款桌上型 AI 超級電腦 ET900N G3</h2><div class="tags"><span class="tag">#邊緣運算</span><span class="tag">#企業硬體</span></div></div>
+                    <div class="detail-section"><div class="section-label">⚡ 重點速報</div><div class="highlight-box">華碩在 CES 2026 展出 ExpertCenter Pro ET900N G3，這被譽為首款「桌上型 AI 超級電腦」。它打破了 AI 訓練必須依賴大型資料中心的限制，讓企業能在本地端進行高強度的模型微調（Fine-tuning）與推論，大幅降低數據外洩風險。</div></div>
+                    <div class="detail-section"><div class="section-label">📊 關鍵細節</div><ul class="detail-list"><li>規格：搭載雙 NVIDIA 高階 GPU 與專利液冷系統。</li><li>體積：僅為傳統伺服器的 1/5，噪音控制在辦公室可接受範圍。</li><li>目標：鎖定金融機構、醫療研究單位等對「數據隱私」極為敏感的企業。</li></ul></div>
+                    <div class="detail-section"><div class="section-label">💡 策略解讀</div><div class="strategy-box"><p class="strategy-text">華碩此舉精準切中金融業痛點——數據合規。這類設備讓銀行能在「內網」環境下安全地訓練專屬 AI Agent，無需上傳雲端，這將加速金融業導入開源模型（如 Llama 4）進行本地化部署的進程。</p></div></div>
+                    <a href="https://press.asus.com/news/press-releases/asus-showcases-expert-center-pro-et900n-g3-at-ces-2026/" target="_blank" class="read-source-btn">閱讀原始文章 (ASUS Press) ↗</a>
+                </div>
+
+                <div id="tab-3" class="tab-content">
+                    <div class="detail-header"><h2 class="detail-title">CES 2026 趨勢揭秘：AI 從「酷炫玩具」進化為「基礎建設」</h2><div class="tags"><span class="tag">#產業趨勢</span><span class="tag">#基礎建設</span></div></div>
+                    <div class="detail-section"><div class="section-label">⚡ 重點速報</div><div class="highlight-box">CES 2026 的核心主題不再是單一的 AI 產品，而是 AI 如何像水、電、網路一樣，隱形於所有設備之中。報導指出，AI 已從「酷炫玩具（Novelty）」階段，正式進入「基礎建設（Infrastructure）」階段。</div></div>
+                    <div class="detail-section"><div class="section-label">📊 關鍵細節</div><ul class="detail-list"><li>隱形化：AI 主動預測需求（如冰箱自動下單、汽車導航）。</li><li>互操作性：不同品牌設備支援統一 AI 協定（如 Matter for AI）。</li><li>轉捩點：2026 年是 AI 硬體落地元年，軟硬整合能力將是勝負關鍵。</li></ul></div>
+                    <div class="detail-section"><div class="section-label">💡 策略解讀</div><div class="strategy-box"><p class="strategy-text">當 AI 成為基礎建設，金融服務的接觸點將無所不在。銀行 App 可能不再是唯一入口，未來的交易可能發生在智慧冰箱、車載系統或眼鏡上。金融業需思考 API Banking 如何對接這些碎片化的物聯網場景。</p></div></div>
+                    <a href="https://meet.bnext.com.tw/articles/view/52968" target="_blank" class="read-source-btn">閱讀原始文章 (Meet Bnext) ↗</a>
+                </div>
+
+                <div id="tab-4" class="tab-content">
+                    <div class="detail-header"><h2 class="detail-title">Anthropic 擬融資百億美元，估值飆升至 3,500 億美元</h2><div class="tags"><span class="tag">#資本市場</span><span class="tag">#獨角獸</span></div></div>
+                    <div class="detail-section"><div class="section-label">⚡ 重點速報</div><div class="highlight-box">生成式 AI 市場熱度不減，Anthropic 傳出正進行新一輪高達百億美元的融資談判，估值預計飆升至 3,500 億美元。這反映出市場對「Claude」系列模型在邏輯推理與安全性上的高度信心。</div></div>
+                    <div class="detail-section"><div class="section-label">📊 關鍵細節</div><ul class="detail-list"><li>估值：僅在 4 個月內，估值翻了近一倍，達 3,500 億美元。</li><li>用途：擴建算力集群與招募頂尖科學家，訓練下一代 Claude 模型。</li><li>競爭：與 Amazon、Google 結盟，對抗 Microsoft/OpenAI 陣營。</li></ul></div>
+                    <div class="detail-section"><div class="section-label">💡 策略解讀</div><div class="strategy-box"><p class="strategy-text">Anthropic 的高估值證明了「大模型」是一場極高資本門檻的遊戲。對金融機構而言，這意味著基礎模型供應商將呈現寡占局面，選擇合作夥伴時需考量其長期存續能力與生態系完整性（如 AWS 整合）。</p></div></div>
+                    <a href="https://tw.stock.yahoo.com/news/%E7%94%9F%E6%88%90%E5%BC%8Fai%E5%B8%82%E5%A0%B4%E7%98%8B%E7%8B%82%E8%BF%BD%E6%8D%A7-anthropic%E6%93%AC%E8%9E%8D%E8%B3%87%E7%99%BE%E5%84%84%E7%BE%8E%E5%85%83-%E4%BC%B0%E5%80%BC4%E5%80%8B%E6%9C%88%E7%BF%BB%E8%BF%91%E5%80%8D-001257384.html" target="_blank" class="read-source-btn">閱讀原始文章 (Yahoo Stock) ↗</a>
+                </div>
+
+                <div id="tab-5" class="tab-content">
+                    <div class="detail-header"><h2 class="detail-title">OpenAI 報告：AI 已成為醫療保健的「非正式前門」</h2><div class="tags"><span class="tag">#產業應用</span><span class="tag">#使用者行為</span></div></div>
+                    <div class="detail-section"><div class="section-label">⚡ 重點速報</div><div class="highlight-box">OpenAI 發布報告指出，ChatGPT 已成為許多用戶尋求醫療建議的「第一站」。雖然 AI 不能取代醫生，但它正扮演「非正式前門（Informal Front Door）」的角色，協助病患整理症狀、解讀報告。</div></div>
+                    <div class="detail-section"><div class="section-label">📊 關鍵細節</div><ul class="detail-list"><li>行為：超過 30% 的用戶曾在就醫前諮詢 AI。</li><li>風險：AI 幻覺（Hallucination）仍是最大風險，需搭配專業審核。</li><li>未來：預測 2026 年後，AI 將直接對接醫院掛號與保險理賠系統。</li></ul></div>
+                    <div class="detail-section"><div class="section-label">💡 策略解讀</div><div class="strategy-box"><p class="strategy-text">此趨勢對保險業（InsurTech）具高度啟發。若 AI 是醫療的前門，那它也將是健康險理賠與核保的前門。保險公司應思考如何將 AI 助理嵌入保戶的健康管理流程，從「事後理賠」轉向「事前預防」。</p></div></div>
+                    <a href="https://www.pymnts.com/artificial-intelligence-2/2026/openai-says-ai-is-now-informal-front-door-to-healthcare/" target="_blank" class="read-source-btn">閱讀原始文章 (Pymnts) ↗</a>
+                </div>
+
+                <div id="tab-6" class="tab-content">
+                    <div class="detail-header"><h2 class="detail-title">輝達與聯想發表「吉瓦級 (Gigawatt) AI 工廠」計畫</h2><div class="tags"><span class="tag">#基礎建設</span><span class="tag">#綠色運算</span></div></div>
+                    <div class="detail-section"><div class="section-label">⚡ 重點速報</div><div class="highlight-box">NVIDIA 與聯想宣佈合作推出「吉瓦級 AI 工廠」解決方案。這是一套針對超大型企業設計的「交鑰匙（Turnkey）」方案，旨在幫助全球 500 強企業快速建立自有的、具備吉瓦級能耗管理能力的 AI 運算中心。</div></div>
+                    <div class="detail-section"><div class="section-label">📊 關鍵細節</div><ul class="detail-list"><li>設計：將散熱、電力、運算單元模組化，縮短建置時間。</li><li>節能：強調液冷技術與能源管理 AI，應對碳排壓力。</li><li>目標：協助傳統企業（如金融、製造）轉型為 AI 原生企業。</li></ul></div>
+                    <div class="detail-section"><div class="section-label">💡 策略解讀</div><div class="strategy-box"><p class="strategy-text">這顯示 AI 競爭已進入「能源戰」。對於大型金控而言，自建 AI 工廠（或私有雲）將涉及龐大的 ESG 碳排挑戰。未來採購 IT 基礎設施時，「能效比（Performance per Watt）」將成為與算力同等重要的指標。</p></div></div>
+                    <a href="https://news.lenovo.com/pressroom/press-releases/nvidia-gigawatt-ai-factories-program-accelerate-enterprise-ai/" target="_blank" class="read-source-btn">閱讀原始文章 (Lenovo News) ↗</a>
+                </div>
+
+                <div id="tab-7" class="tab-content">
+                    <div class="detail-header"><h2 class="detail-title">OpenAI 策略轉型：ChatGPT 2026 將成為「個人超級助理」</h2><div class="tags"><span class="tag">#產品策略</span><span class="tag">#AgenticAI</span></div></div>
+                    <div class="detail-section"><div class="section-label">⚡ 重點速報</div><div class="highlight-box">OpenAI 產品高管 Fidji Simo 透露，ChatGPT 的 2026 年戰略目標是成為「個人超級助理」。未來的 ChatGPT 不再是被動等待指令，而是能主動管理行事曆、預訂行程、甚至處理複雜的購物與財務決策。</div></div>
+                    <div class="detail-section"><div class="section-label">📊 關鍵細節</div><ul class="detail-list"><li>主動性：AI 根據用戶習慣主動提出建議（如提醒紀念日並訂餐廳）。</li><li>跨應用：具備操作其他 App 的權限，實現真正的 Agent 功能。</li><li>隱私：建立新信任框架，讓用戶願意授權處理個資。</li></ul></div>
+                    <div class="detail-section"><div class="section-label">💡 策略解讀</div><div class="strategy-box"><p class="strategy-text">這是「理財機器人」的終極型態。如果 ChatGPT 能幫用戶管理財務，銀行的 App 可能被架空（Disintermediation）。金融業必須爭取成為這個超級助理背後的「信任節點」或「支付軌道」，而非試圖與之對抗。</p></div></div>
+                    <a href="https://indianexpress.com/article/technology/artificial-intelligence/chatgpt-personal-superassistant-openai-fidji-simo-2026-strategy-10460109/" target="_blank" class="read-source-btn">閱讀原始文章 (Indian Express) ↗</a>
+                </div>
+
+                <div id="tab-8" class="tab-content">
+                    <div class="detail-header"><h2 class="detail-title">蘋果 2026 路線圖：AI 智慧眼鏡將取代全功能 AR 設備</h2><div class="tags"><span class="tag">#穿戴裝置</span><span class="tag">#Apple</span></div></div>
+                    <div class="detail-section"><div class="section-label">⚡ 重點速報</div><div class="highlight-box">Apple 的 2026 產品路線圖顯示，重心將從笨重的 Vision Pro 轉向輕量化的「AI 智慧眼鏡」。這款眼鏡將不強調全沈浸式 AR，而是作為 Siri（即 Apple Intelligence）的視覺延伸，提供即時資訊疊加。</div></div>
+                    <div class="detail-section"><div class="section-label">📊 關鍵細節</div><ul class="detail-list"><li>定位：日常生活助理，具備物體辨識、即時翻譯、導航提示。</li><li>整合：與 iPhone 深度綁定，算力外包給手機以減輕重量。</li><li>市場：全功能 AR 頭盔退居專業領域，輕量眼鏡面向大眾。</li></ul></div>
+                    <div class="detail-section"><div class="section-label">💡 策略解讀</div><div class="strategy-box"><p class="strategy-text">這將創造新的「支付場景」。想像用戶看著商品就能直接透過眼鏡喚起 Apple Pay 結帳。銀行需要開始研究「視線支付（Gaze Payment）」或基於視覺辨識的金融服務體驗。</p></div></div>
+                    <a href="https://www.blockchain-council.org/ai/apples-ar-glasses/" target="_blank" class="read-source-btn">閱讀原始文章 (Blockchain Council) ↗</a>
+                </div>
+
+                <div id="tab-9" class="tab-content">
+                    <div class="detail-header"><h2 class="detail-title">軟銀完成對 OpenAI 410 億美元投資，取得 11% 股權</h2><div class="tags"><span class="tag">#資本市場</span><span class="tag">#孫正義</span></div></div>
+                    <div class="detail-section"><div class="section-label">⚡ 重點速報</div><div class="highlight-box">軟銀集團完成對 OpenAI 的鉅額投資，總額達 410 億美元，取得約 11% 股權。孫正義將此視為實現「人工超級智慧（ASI）」的關鍵拼圖，並計畫將 OpenAI 技術與 Arm 晶片、機器人事業進行深度整合。</div></div>
+                    <div class="detail-section"><div class="section-label">📊 關鍵細節</div><ul class="detail-list"><li>股權：軟銀成為繼微軟之後的重要戰略股東。</li><li>願景：孫正義重申 AI 將超越人類智慧 1 萬倍，必須確保在場。</li><li>影響：將加速 AI 技術在機器人（Robotics）領域的落地。</li></ul></div>
+                    <div class="detail-section"><div class="section-label">💡 策略解讀</div><div class="strategy-box"><p class="strategy-text">軟銀的入場將加速 AI 與實體世界的結合（Physical AI）。對於金融業投資部門而言，需關注「AI + Robotics」板塊的崛起，這可能是繼半導體後的下一個超級賽道。</p></div></div>
+                    <a href="https://medium.com/@btibor91/this-week-in-openai-and-anthropic-news-week-1-2026-33b0132793e5" target="_blank" class="read-source-btn">閱讀原始文章 (Medium) ↗</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="view-competitor" class="view-section">
+    <header><h1>Global Financial AI Watch</h1><div class="subtitle">追蹤期間：2025/09 - 2026/01 </div></header>
+    <div class="filter-section">
+        <label for="monthFilter">📅 篩選月份：</label>
+        <select id="monthFilter" onchange="filterCards()">
+            <option value="all">全部顯示 (All)</option>
+            <option value="2026-01">2026年 01月</option>
+            <option value="2025-12">2025年 12月</option>
+            <option value="2025-11">2025年 11月</option>
+            <option value="2025-10">2025年 10月</option>
+            <option value="2025-09">2025年 09月</option>
+        </select>
+    </div>
+    <div class="container">
+        <div class="columns-wrapper">
+            <div class="column tw-col">
+                <div class="col-header tw-header">🇹🇼 台灣市場 (Taiwan)</div>
+
+                
+
+                <div class="card" data-date="2026-01">
+                    <div class="meta-row"><span class="date-badge">2026/01/05</span><span>Taipei</span></div>
+                    <span class="company">國泰金控 (Cathay Holdings)</span>
+                    <h3 class="product-title">2026 年度招募：聚焦 AI 代理人與數據共享</h3>
+                    <p class="user-case">國泰金控啟動 2026 招募，職缺重心轉向「AI Agent 架構師」與「跨子公司數據治理專家」，建立統一 AI 代理人平台。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>跨域協作：</strong>真正的金控綜效來自數據打通，競爭力取決於能否構建統一的 AI 腦。</p></div>
+                    <a href="https://www.cathayholdings.com/holdings/lastest_news/news_archive/newsarticle?newsID=kevK4L5zSUOw1gpI8DlrLg" target="_blank" class="source-link">Source: 國泰金控官網</a>
+                </div>
+
+                <div class="card" data-date="2026-01">
+                    <div class="meta-row"><span class="date-badge">2026/01/02</span><span>Taipei</span></div>
+                    <span class="company">DXC / Alpha Modus</span>
+                    <h3 class="product-title">金融服務 Kiosk 自助服務機</h3>
+                    <p class="user-case">在台灣推出整合生成式 AI 的新型金融 Kiosk，讓高齡客群透過語音對話在實體機台上完成查詢與理財操作。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>虛實整合：</strong>普惠金融最後一哩路，實體設備智能化是服務高齡客群的關鍵切入點。</p></div>
+                    <a href="https://www.taiwannews.com.tw/news/6277711" target="_blank" class="source-link">Source: Taiwan News</a>
+                </div>
+
+                <div class="card" data-date="2025-12">
+                    <div class="meta-row"><span class="date-badge">2025/12/24</span><span>Taipei</span></div>
+                    <span class="company">SinoPac Holdings (永豐金控)</span>
+                    <h3 class="product-title">iWish 智選與 AI Agent 戰略</h3>
+                    <p class="user-case">於首屆「永豐金控科技年會」上，發表 2025 核心戰略「AI Agent」。推出「iWish」智能理財服務，利用 Agentic AI 技術主動拆解客戶財務目標。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>服務主動化：</strong> Agent 則能「執行」。永豐的動機在於搶佔「懶人理財」的最後一哩路。</p></div>
+                    <a href="https://www.bnext.com.tw/article/89620/sinopac1224" target="_blank" class="source-link">Source: 數位時代</a>
+                </div>
+               
+            <div class="card" data-date="2025-12">
+                    <div class="meta-row"><span class="date-badge">2025/12/15</span><span>Taipei</span></div>
+                    <span class="company">台新銀行 (Richart)</span>
+                    <h3 class="product-title">Richart 2026 全新權益：首納 AI 服務回饋</h3>
+                    <p class="user-case">台新數位銀行 Richart 發布 2026 年度權益，首度將「使用 AI 智能理財功能」列為高額回饋條件，培養用戶與 AI 互動習慣。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>行為變現：</strong>將 AI 使用行為貨幣化，AI 不再只是工具，而是會員分級的核心驅動力。</p></div>
+                    <a href="https://www.taishinbank.com.tw/TSB/personal/common/news/TSBankNews-007586/" target="_blank" class="source-link">Source: 台新銀行官網</a>
+                </div>
+                
+                <div class="card" data-date="2025-11">
+                    <div class="meta-row"><span class="date-badge">2025/11/13</span><span>Taipei</span></div>
+                    <span class="company">Taiwan Financial Services Roundtable</span>
+                    <h3 class="product-title">2025 金融科技投資創新高</h3>
+                    <p class="user-case">預估 2025 年台灣金融業投入 FinTech 經費將達 448 億元。其中銀行業佔比 73%，重點投資於「AI 智能理財」與「資安聯防」。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>資本戰：</strong> 小型券商若無足夠預算投入 AI 基礎建設，將面臨被邊緣化的風險。</p></div>
+                    <a href="https://money.udn.com/money/story/5613/9138180" target="_blank" class="source-link">Source: 經濟日報</a>
+                </div>
+                <div class="card" data-date="2025-10">
+                    <div class="meta-row"><span class="date-badge">2025/10/17</span><span>Taipei</span></div>
+                    <span class="company">Taipei Fubon Bank (台北富邦銀行)</span>
+                    <h3 class="product-title">AI 行銷模型獲 Cloudera 全球大獎</h3>
+                    <p class="user-case">模型能精準預測客戶對 24 種金融商品興趣，並自動計算最佳接觸時間，大幅提升行銷轉換率。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>精準打擊：</strong> 能比同業更早發現客戶的「隱性需求」，形成強大的業務掠奪能力。</p></div>
+                    <a href="https://www.digitimes.com.tw/tech/dt/n/shwnws.asp?id=0000735299_FBN3JA6Q8DR0TNLFRI1C5" target="_blank" class="source-link">Source: DIGITIMES</a>
+                </div>
+                <div class="card" data-date="2025-09">
+                    <div class="meta-row"><span class="date-badge">2025/09/02</span><span>Taipei</span></div>
+                    <span class="company">FSC (金管會)</span>
+                    <h3 class="product-title">金融專用 AI 大語言模型計畫</h3>
+                    <p class="user-case">積極開發「金融 AI 大語言模型」，旨在為中小型金融機構提供一個合規、懂金融術語的 AI 基礎設施。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>基礎建設共享：</strong> 一旦「公版大模型」上線，大型金控必須在「應用層」創新，而非僅靠算力優勢。</p></div>
+                    <a href="https://money.udn.com/money/story/5613/8977371" target="_blank" class="source-link">Source: 經濟日報</a>
+                </div>
+            </div>
+
+            <div class="column global-col">
+                <div class="col-header global-header">🌏 國際市場 (Global)</div>
+
+                <div class="card" data-date="2026-01">
+                    <div class="meta-row"><span class="date-badge">2026/01/07</span><span>USA</span></div>
+                    <span class="company">Goldman Sachs (高盛)</span>
+                    <h3 class="product-title">OneGS 3.0：AI 嵌入核心營運能力</h3>
+                    <p class="user-case">啟動「OneGS 3.0」戰略，將 AI 模型直接嵌入交易、風控與併購流程，新系統可自動優化資產配置並生成情境報告。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>核心重塑：</strong>AI 晉升為「營運系統 (OS)」，投行護城河將建立在誰能更快將宏觀雜訊轉化為策略。</p></div>
+                    <a href="https://www.nasdaq.com/articles/should-you-buy-goldman-stock-macro-clarity-rekindles-dealmaking" target="_blank" class="source-link">Source: Nasdaq</a>
+                </div>
+
+              
+
+                <div class="card" data-date="2025-12">
+                    <div class="meta-row"><span class="date-badge">2025/12/28</span><span>Singapore</span></div>
+                    <span class="company">DBS Bank (星展銀行)</span>
+                    <h3 class="product-title">蟬聯 2025 全球最佳銀行：AI+區塊鏈</h3>
+                    <p class="user-case">憑藉「AI + Blockchain」策略獲獎，利用 AI 預測現金流並結合區塊鏈自動觸發放款，實現「隱形銀行」願景。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>技術融合：</strong>單一技術非亮點，AI 與區塊鏈的「組合拳」才能解決信任與效率的雙重痛點。</p></div>
+                    <a href="https://news.cnyes.com/news/id/6280201" target="_blank" class="source-link">Source: 鉅亨網</a>
+                </div>
+
+                
+
+                <div class="card" data-date="2025-12">
+                    <div class="meta-row"><span class="date-badge">2025/12/15</span><span>Global</span></div>
+                    <span class="company">McKinsey (麥肯錫)</span>
+                    <h3 class="product-title">2025 報告：AI 代理可增 4% 獲利潛力</h3>
+                    <p class="user-case">指出 Agentic AI 是 2025-2026 關鍵增長點，在自動化合規與理財建議上，預估可為金控獲利帶來 4% 提升。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>量化價值：</strong>AI 投資不再是信仰，高層需要明確 ROI，Agentic AI 提供了直接獲利證明。</p></div>
+                    <a href="https://www.bnext.com.tw/article/89618/mckinsey-agentic-ai" target="_blank" class="source-link">Source: 數位時代</a>
+                </div>
+
+                <div class="card" data-date="2025-12">
+                    <div class="meta-row"><span class="date-badge">2025/12/22</span><span>USA</span></div>
+                    <span class="company">Stripe</span>
+                    <h3 class="product-title">自動化財務長 (Auto-CFO)</h3>
+                    <p class="user-case">收購 AI 新創，為中小企業提供現金流預測與庫存建議，模糊支付與管顧界線。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>跨界競爭：</strong>支付業者向上整合 ERP 功能，傳統銀行企金面臨挑戰。</p></div>
+                    <a href="https://www.digitimes.com/news/a20251222PD203.html" target="_blank" class="source-link">Source: Digitimes</a>
+                </div>
+
+                <div class="card" data-date="2025-12">
+                    <div class="meta-row"><span class="date-badge">2025/12/03</span><span>Singapore</span></div>
+                    <span class="company">The Monetary Authority of Singapore</span>
+                    <h3 class="product-title">新加坡與英國深化 AI 金融合作，推動 Agentic AI 框架</h3>
+                    <p class="user-case">新加坡 MAS 與英國 FCA 建立跨境測試環境，確保金融機構在從「實驗模型」轉向「自主代理系統」時能符合合規與安全標準。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>合規先行：</strong> 當 AI 開始擁有「自主代理 (Agentic)」權限時，跨國監管標準的互通性將決定金融機構能否進行全球化部署。</p></div>
+                    <a href="https://www.mas.gov.sg/news/media-releases/2025/mas-and-uk-fca-announces-partnership-on-ai-in-finance" class="source-link" target="_blank">MAS</a>
+                </div>
+
+                <div class="card" data-date="2025-11">
+                    <div class="meta-row"><span class="date-badge">2025/11/18</span><span>New York</span></div>
+                    <span class="company">Robinhood / Fintechs</span>
+                    <h3 class="product-title">預測市場 (Prediction Markets) 與 AI</h3>
+                    <p class="user-case">Robinhood CEO 指出「預測市場」將是成長最快的業務。結合 AI 分析海量輿情，提供更精準的事件型合約。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>新資產類別：</strong> AI 驅動的預測市場創造了高黏著度、高話題性的新賭局，是吸引年輕世代的關鍵。</p></div>
+                    <a href="https://money.udn.com/money/story/5618/9146110" target="_blank" class="source-link">Source: 經濟日報</a>
+                </div>
+
+                <div class="card" data-date="2025-11">
+                    <div class="meta-row"><span class="date-badge">2025/11/11</span><span>APAC</span></div>
+                    <span class="company">Visa</span>
+                    <h3 class="product-title">AI 商務代理人 (AI Commercial Agent)</h3>
+                    <p class="user-case">啟動「AI 商務」試點，允許消費者的 AI 代理直接與商家的 AI 代理溝通並完成支付，無需人工介入。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>基礎設施轉型：</strong> 支付巨頭正轉型為「AI 認證中心」。確保即使在機器人經濟時代，Visa 仍是不可或缺的過路費收費者。</p></div>
+                    <a href="https://money.udn.com/money/story/5613/9137428" target="_blank" class="source-link">Source: 經濟日報</a>
+                </div>
+
+                <div class="card" data-date="2025-09">
+                    <div class="meta-row"><span class="date-badge">2025/09/30</span><span>Greater China</span></div>
+                    <span class="company">Visa</span>
+                    <h3 class="product-title">大中華區總裁任命與 AI 戰略</h3>
+                    <p class="user-case">任命前 Intel 高層張文翊為總裁，重點戰略將放在「智慧商務」與「AI 防詐」，利用 AI 分析跨境交易模式。</p>
+                    <div class="insight-box"><span class="insight-title">💡 PM Insight</span><p class="insight-text"><strong>科技轉型：</strong> 支付業的競爭已不再是通路覆蓋率，而是「科技含金量」。</p></div>
+                    <a href="https://money.udn.com/money/story/5612/9037800" target="_blank" class="source-link">Source: 經濟日報</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="view-workflow" class="view-section">
+    <div class="container">
+        <div class="workflow-header">
+            <h1>Human-AI Collaboration Model</h1>
+            <p>我們如何與 Gemini 協作，打造高效 AI 戰情室</p>
+        </div>
+
+        <div class="workflow-steps">
+            <div class="step-card">
+                <div class="step-badge">STEP 01: 廣度搜索</div>
+                <div class="step-title">🌐 採集全球 AI 關鍵動態</div>
+                <p style="text-align: center; color: #ccc;">利用 Gemini 的即時聯網能力，快速掃描本週全球科技大事。</p>
+                <div class="prompt-container">
+                    <span class="prompt-label">USER PROMPT:</span>
+                    <p class="prompt-text" id="prompt-1">這次的任務是希望你可以作為一個爬蟲...</p>
+                    <button class="copy-btn" onclick="copyText('prompt-1')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-badge">STEP 02: 垂直聚焦</div>
+                <div class="step-title">🏦 鎖定金融與 FinTech 應用</div>
+                <p style="text-align: center; color: #ccc;">針對金融業需求，深挖國內外同業的落地案例與應用場景。</p>
+                <div class="prompt-container">
+                    <span class="prompt-label">USER PROMPT:</span>
+                    <p class="prompt-text" id="prompt-2">[角色設定] 你現在是一個專業的金融科技新聞爬蟲+研究員...</p>
+                    <button class="copy-btn" onclick="copyText('prompt-2')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-badge">STEP 03: 人工決策</div>
+                <div class="step-title">🧠 關鍵情報篩選 (Human-in-the-loop)</div>
+                <div class="interaction-box">
+                    <p class="interaction-text">"Gemini 已為您彙整 20 篇相關新聞。請選擇您想深入分析的項目？"</p>
+                    <p style="margin-top: 10px; color: #e94560;">➜ 人類管理者：選擇最具戰略價值的 10 篇新聞進行保留。</p>
+                </div>
+                <p style="text-align: center; color: #ccc; margin-top: 20px;">此步驟確保了週報的「雜訊過濾」與「觀點正確性」，AI 負責廣度，人類負責精度。</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-badge">STEP 04: 智能生成</div>
+                <div class="step-title">⚡ 自動化 HTML 報告產出</div>
+                <p style="text-align: center; color: #ccc;">將篩選後的資訊，依據指定的 HTML 模板與視覺風格進行封裝。</p>
+                <div class="prompt-container">
+                    <span class="prompt-label">USER PROMPT:</span>
+                    <p class="prompt-text" id="prompt-4">接下來我要請你生成html...</p>
+                    <button class="copy-btn" onclick="copyText('prompt-4')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-badge">STEP 05: 價值總結</div>
+                <div class="step-title">🤝 人機分工協作矩陣</div>
+                <table class="role-matrix">
+                    <thead>
+                        <tr>
+                            <th width="50%">🤖 Gemini (AI) 的角色</th>
+                            <th width="50%">🧑‍💻 Human (團隊) 的價值</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>海量掃描：</strong> 1秒閱讀數萬字報告。</td>
+                            <td><strong>戰略定調：</strong> 決定本週關注的「核心主題」。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>格式標準化：</strong> 生成完美的 HTML/CSS 代碼。</td>
+                            <td><strong>專業判讀：</strong> 驗證新聞對金融業的真實影響力。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>多語言翻譯：</strong> 瞬間打破英/日文資訊隔閡。</td>
+                            <td><strong>洞察延伸：</strong> 提出「投資熱點」與「管理啟示」。</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center; border-top: 1px solid #533483; padding-top: 20px; color: #fff;">
+                                <em>人類需要的核心技能：AI 溝通力 (Prompting)、市場敏銳度、邏輯架構力</em>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // View Switching Logic
+    function switchView(viewName) {
+        document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+        document.getElementById('view-' + viewName).classList.add('active');
+        
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.nav-btn[data-target="view-${viewName}"]`).classList.add('active');
+
+        window.scrollTo(0, 0);
+    }
+
+    // Tab Switching for Weekly View
+    function openTab(tabId) {
+        document.querySelectorAll('.news-item').forEach(el => el.classList.remove('active'));
+        const activeItem = document.querySelectorAll('.news-item')[tabId - 1];
+        if (activeItem) activeItem.classList.add('active');
+
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        const activeContent = document.getElementById('tab-' + tabId);
+        if (activeContent) activeContent.classList.add('active');
+    }
+    
+    // Jump to News Section
+    function jumpToNews(tabId) {
+        openTab(tabId);
+        const section = document.getElementById('news-section-anchor');
+        if (section) {
+            const yOffset = -70; 
+            const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({top: y, behavior: 'smooth'});
+        }
+    }
+
+    // Filter Logic for Competitor Page
+    function filterCards() {
+        const selectedMonth = document.getElementById('monthFilter').value;
+        const cards = document.querySelectorAll('#view-competitor .card');
+
+        cards.forEach(card => {
+            const cardDate = card.getAttribute('data-date');
+            if (selectedMonth === 'all' || cardDate === selectedMonth) {
+                card.classList.remove('hidden');
+                card.style.display = 'block';
+            } else {
+                card.classList.add('hidden');
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Copy to Clipboard Function
+    function copyText(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Prompt Copied to Clipboard!");
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+</script>
+
+</body>
+</html>
