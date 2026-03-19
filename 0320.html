@@ -1597,10 +1597,10 @@
     // Touch swipe for carousel
     (function() {
         let startX = 0;
-        const track = document.getElementById('analysisInner');
-        if (!track) return;
-        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-        track.addEventListener('touchend', e => {
+        const container = document.getElementById('analysisCarousel');
+        if (!container) return;
+        container.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+        container.addEventListener('touchend', e => {
             const diff = startX - e.changedTouches[0].clientX;
             if (Math.abs(diff) > 40) moveAnalysis(diff > 0 ? 1 : -1);
         }, { passive: true });
