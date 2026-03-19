@@ -335,7 +335,8 @@
             #view-competitor header { padding: 24px 16px; border-radius: 6px; }
             #view-competitor h1 { font-size: 18px; }
             #view-competitor .subtitle { font-size: 12px; }
-            #view-competitor .filter-section { padding: 10px 12px; gap: 8px; margin-bottom: 10px; }
+            #view-competitor .filter-section { flex-direction: column; padding: 10px 12px; gap: 8px; margin-bottom: 10px; }
+            .filter-divider-v { display: none; }
             .filter-row { gap: 8px; }
             .filter-label { min-width: 44px; font-size: 11px; }
             .filter-select { font-size: 12px; min-width: 0; }
@@ -363,20 +364,28 @@
         #view-competitor .subtitle { margin-top: 10px; opacity: 0.9; font-size: 14px; font-weight: 300; }
         #view-competitor .filter-section {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
             padding: 14px 20px;
             margin-bottom: 16px;
             background: white;
             border-radius: 10px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            flex-wrap: wrap;
         }
         .filter-row {
             display: flex;
             align-items: center;
             gap: 10px;
-            flex-wrap: wrap;
+        }
+        .filter-divider-v {
+            width: 1px;
+            height: 22px;
+            background: #e2e8f0;
+            flex-shrink: 0;
         }
         .filter-label {
             font-size: 12px;
@@ -957,6 +966,7 @@
                 <option value="2025-09">2025 年 9 月</option>
             </select>
         </div>
+        <div class="filter-divider-v"></div>
         <div class="filter-row">
             <span class="filter-label">🏦 同業</span>
             <select id="companyFilter" class="filter-select" onchange="filterCards()">
