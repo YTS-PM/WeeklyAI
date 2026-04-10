@@ -1,0 +1,2426 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trend Weekly - 2026 04 W2 & Q1 Report</title>
+    <style>
+        /* =================Global Reset & Navigation================= */
+        
+         :root {
+            /* Page 1: War Room Red Theme */
+            --p1-primary: #b71c1c;
+            --p1-accent: #d32f2f;
+            --p1-bg: #f8f9fa;
+            --p1-card-bg: #ffffff;
+            --p1-text: #212121;
+            /* Page 2: Tech Blue Theme */
+            --p2-primary-bg: #f8fafc;
+            --p2-header-bg: #0f172a;
+            --p2-card-bg: #ffffff;
+            --p2-text-main: #334155;
+            --p2-accent-tw: #059669;
+            --p2-accent-global: #2563eb;
+            --p2-timeline-line: #cbd5e1;
+            --p2-insight-bg: #fffbeb;
+            --p2-insight-border: #f59e0b;
+            /* Page 3: Workflow Purple/Dark Theme */
+            --p3-bg: #1a1a2e;
+            --p3-card-bg: #16213e;
+            --p3-accent: #0f3460;
+            --p3-highlight: #e94560;
+            --p3-text: #e0e0e0;
+            --p3-step-line: #533483;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "PingFang TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f0f2f5;
+            scroll-behavior: smooth;
+        }
+        /* Top Navigation Bar */
+        
+        .nav-container {
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background: #ffffff;
+            color: #555;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .nav-btn:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .nav-btn.active {
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        /* Active Colors per Page */
+        
+        /* 新增：Q1 報告的專屬按鈕顏色 */
+        .nav-btn.active[data-target="view-q1"] {
+            background: linear-gradient(135deg, #2b6cb0, #2c5282);
+        }
+
+        .nav-btn.active[data-target="view-weekly"] {
+            background: linear-gradient(135deg, #b71c1c, #d32f2f);
+        }
+        
+        .nav-btn.active[data-target="view-competitor"] {
+            background: linear-gradient(135deg, #0f172a, #334155);
+        }
+        
+        .nav-btn.active[data-target="view-workflow"] {
+            background: linear-gradient(135deg, #533483, #e94560);
+        }
+        /* View Toggle Logic */
+        
+        .view-section {
+            display: none;
+            padding-bottom: 50px;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .view-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* =================PAGE 1: AI Trend Weekly (Red UI)================= */
+        
+        #view-weekly .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        #view-weekly .banner {
+            background: linear-gradient(135deg, #8e0000 0%, #b71c1c 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px -5px rgba(183, 28, 28, 0.3);
+            position: relative;
+            overflow: hidden;
+            border-left: 8px solid #ff5252;
+        }
+        
+        #view-weekly .banner h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        #view-weekly .banner p {
+            margin: 8px 0 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        
+        #view-weekly .trend-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border-top: 4px solid var(--p1-primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        #view-weekly .section-header {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--p1-primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        #view-weekly .summary-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #333;
+            text-align: justify;
+            margin: 0;
+        }
+        /* ---- exec-analysis: 桌機 grid 展開（預設） ---- */
+        
+        #view-weekly .exec-analysis {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        /* 桌機：track / inner 透明穿透，讓卡片直接參與 grid */
+        
+        #view-weekly .analysis-carousel-track {
+            display: contents;
+        }
+        
+        #view-weekly .analysis-carousel-inner {
+            display: contents;
+        }
+        
+        #view-weekly .analysis-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            border-top: 4px solid var(--p1-primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        
+        #view-weekly .analysis-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        #view-weekly .analysis-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--p1-primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        #view-weekly .analysis-content p {
+            margin: 0;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.6;
+        }
+        /* 桌機隱藏所有 carousel 控件 */
+        
+        .analysis-arrow {
+            display: none;
+        }
+        
+        .analysis-dots {
+            display: none;
+        }
+        
+        .analysis-counter {
+            display: none;
+        }
+        /* ---- Carousel 基礎樣式（手機啟用時套用） ---- */
+        
+        .analysis-arrow-base {
+            flex-shrink: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid var(--p1-primary);
+            background: white;
+            color: var(--p1-primary);
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            line-height: 1;
+        }
+        
+        .analysis-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            border: none;
+            padding: 0;
+        }
+        
+        .analysis-dot.active {
+            background: var(--p1-primary);
+            transform: scale(1.3);
+        }
+        
+        #view-weekly .analysis-link {
+            color: #0056b3;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            background-color: rgba(0, 86, 179, 0.05);
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+        
+        #view-weekly .analysis-link:hover {
+            background-color: #0056b3;
+            color: white;
+            text-decoration: none;
+        }
+        
+        #view-weekly .analysis-link::after {
+            content: " ↴";
+            font-size: 0.8em;
+        }
+        
+        #view-weekly .news-section {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 25px;
+            align-items: start;
+            scroll-margin-top: 80px;
+        }
+        
+        #view-weekly .news-list {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--p1-primary);
+            max-height: 800px;
+            overflow-y: auto;
+        }
+        
+        #view-weekly .news-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+        
+        #view-weekly .news-item:hover {
+            background-color: #fff5f5;
+        }
+        
+        #view-weekly .news-item.active {
+            background-color: #ffebee;
+            border-left: 3px solid var(--p1-primary);
+        }
+        
+        #view-weekly .news-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+        
+        #view-weekly .news-num {
+            font-weight: 800;
+            color: var(--p1-primary);
+            font-size: 14px;
+        }
+        
+        #view-weekly .news-list-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        
+        #view-weekly .news-list-summary {
+            font-size: 12px;
+            color: #666;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+        
+        #view-weekly .tab-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--p1-primary);
+            min-height: 400px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+            position: relative;
+        }
+        
+        #view-weekly .tab-content.active {
+            display: block;
+        }
+        
+        #view-weekly .detail-header {
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        #view-weekly .detail-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #222;
+            margin: 0 0 10px 0;
+            line-height: 1.3;
+        }
+        
+        #view-weekly .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        #view-weekly .tag {
+            background: #f1f1f1;
+            color: #555;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        #view-weekly .detail-section {
+            margin-bottom: 25px;
+        }
+        
+        #view-weekly .section-label {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--p1-primary);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        #view-weekly .highlight-box {
+            background: #fff8f8;
+            border-left: 4px solid var(--p1-primary);
+            padding: 15px;
+            border-radius: 0 4px 4px 0;
+            font-size: 15px;
+            color: #333;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        
+        #view-weekly .detail-list li {
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.6;
+        }
+        
+        #view-weekly .strategy-box {
+            background: linear-gradient(to right, #fffaf0, #fff);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        
+        #view-weekly .strategy-text {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        
+        #view-weekly .read-source-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #fff;
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            float: right;
+        }
+        
+        #view-weekly .read-source-btn:hover {
+            border-color: var(--p1-primary);
+            color: var(--p1-primary);
+            background-color: #fff5f5;
+        }
+        
+        #view-weekly .tab-content::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        /* ====== New Styles for Impact/Stroke Section (Redesigned) ====== */
+        
+        .impact-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .impact-row {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            background-color: #fafafa;
+            transition: transform 0.2s ease;
+        }
+        
+        .impact-row:hover {
+            transform: translateX(2px);
+            background-color: #f5f5f5;
+        }
+        
+        .impact-row.benefit {
+            border-left: 5px solid #2e7d32;
+        }
+        
+        .impact-row.risk {
+            border-left: 5px solid #c62828;
+        }
+        
+        .impact-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .impact-industry {
+            font-weight: 800;
+            font-size: 14px;
+            color: #212121;
+        }
+        
+        .impact-tickers {
+            font-size: 12px;
+            background-color: #fff;
+            padding: 3px 8px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            color: #555;
+            font-weight: 600;
+            font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+        }
+        
+        .impact-reason {
+            font-size: 14px;
+            color: #424242;
+            line-height: 1.5;
+            margin: 0;
+            font-style: normal;
+        }
+        
+        @media (max-width: 900px) {
+            #view-weekly .news-section {
+                grid-template-columns: 1fr;
+            }
+            #view-weekly .news-list {
+                max-height: 300px;
+            }
+        }
+        /* ===== RWD: 手機端 (≤ 600px) ===== */
+        
+        @media (max-width: 600px) {
+            /* ---- Carousel 啟用 ---- */
+            #view-weekly .exec-analysis {
+                display: block;
+                margin-bottom: 0;
+                position: relative;
+            }
+            #view-weekly .analysis-carousel-track {
+                display: block;
+                overflow: hidden;
+                border-radius: 12px;
+            }
+            #view-weekly .analysis-carousel-inner {
+                display: flex;
+                transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            #view-weekly .analysis-card {
+                flex: 0 0 100%;
+                box-sizing: border-box;
+                transform: none !important;
+                transition: none;
+            }
+            /* 下方圓點列 */
+            .analysis-dots {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 12px;
+                margin-bottom: 20px;
+            }
+            /* Nav */
+            .nav-container {
+                gap: 6px;
+                padding: 8px 10px;
+            }
+            .nav-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            /* Page 1 Banner */
+            #view-weekly .banner {
+                padding: 24px 18px;
+                border-radius: 8px;
+            }
+            #view-weekly .banner h1 {
+                font-size: 20px;
+                letter-spacing: 0.5px;
+            }
+            #view-weekly .banner p {
+                font-size: 13px;
+            }
+            /* Page 1 Summary */
+            #view-weekly .trend-summary {
+                padding: 18px;
+            }
+            #view-weekly .summary-text {
+                font-size: 14px;
+            }
+            #view-weekly .section-header {
+                font-size: 15px;
+            }
+            /* Page 1 Analysis cards — 已由 900px 變單欄，這裡收緊 padding */
+            #view-weekly .analysis-card {
+                padding: 18px;
+            }
+            #view-weekly .analysis-title {
+                font-size: 14px;
+            }
+            #view-weekly .analysis-content li {
+                font-size: 13px;
+            }
+            /* Page 1 News List */
+            #view-weekly .news-list {
+                max-height: 260px;
+                padding: 6px;
+            }
+            #view-weekly .news-item {
+                padding: 12px 10px;
+            }
+            #view-weekly .news-list-title {
+                font-size: 13px;
+            }
+            #view-weekly .news-list-summary {
+                font-size: 11px;
+            }
+            /* Page 1 Tab content */
+            #view-weekly .tab-content {
+                padding: 18px 14px;
+            }
+            #view-weekly .detail-title {
+                font-size: 17px;
+            }
+            #view-weekly .highlight-box {
+                font-size: 13px;
+                padding: 12px;
+            }
+            #view-weekly .detail-list li {
+                font-size: 13px;
+            }
+            #view-weekly .strategy-text {
+                font-size: 13px;
+            }
+            #view-weekly .read-source-btn {
+                float: none;
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+                margin-top: 16px;
+            }
+            .impact-industry {
+                font-size: 12px;
+            }
+            .impact-reason {
+                font-size: 12px;
+            }
+            /* Page 1 Tags */
+            #view-weekly .tag {
+                font-size: 11px;
+                padding: 3px 8px;
+            }
+            /* Page 1 Container */
+            #view-weekly .container {
+                padding: 0 12px;
+                margin: 16px auto;
+            }
+            /* Page 2 Competitor */
+            #view-competitor .container {
+                padding: 0 12px;
+                margin: 16px auto;
+            }
+            #view-competitor header {
+                padding: 24px 16px;
+                border-radius: 6px;
+            }
+            #view-competitor h1 {
+                font-size: 18px;
+            }
+            #view-competitor .subtitle {
+                font-size: 12px;
+            }
+            #view-competitor .filter-section {
+                padding: 10px 12px;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+            .filter-row {
+                gap: 8px;
+            }
+            .filter-label {
+                min-width: 44px;
+                font-size: 11px;
+            }
+            .filter-select {
+                font-size: 12px;
+                min-width: 0;
+            }
+            #view-competitor .card {
+                padding: 16px;
+                margin-bottom: 24px;
+            }
+            #view-competitor .product-title {
+                font-size: 15px;
+            }
+            #view-competitor .user-case {
+                font-size: 13px;
+            }
+            #view-competitor .insight-text {
+                font-size: 12px;
+            }
+            #view-competitor .col-header {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+            #view-competitor .date-badge {
+                font-size: 11px;
+            }
+            /* Page 3 Workflow */
+            #view-workflow .workflow-header h1 {
+                font-size: 22px;
+            }
+            #view-workflow .workflow-header p {
+                font-size: 14px;
+            }
+            .step-card {
+                padding: 24px 16px;
+                margin-bottom: 40px;
+            }
+            .step-title {
+                font-size: 17px;
+            }
+            .step-badge {
+                font-size: 11px;
+                padding: 6px 14px;
+                white-space: nowrap;
+            }
+            .prompt-text {
+                font-size: 12px;
+            }
+            .role-matrix th,
+            .role-matrix td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+        }
+        /* =================PAGE 2: Competitor Watch (Blue UI)================= */
+        
+        #view-competitor .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        #view-competitor header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        #view-competitor h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        #view-competitor .subtitle {
+            margin-top: 10px;
+            opacity: 0.9;
+            font-size: 14px;
+            font-weight: 300;
+        }
+        
+        #view-competitor .filter-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 14px 20px;
+            margin-bottom: 16px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            min-width: 52px;
+        }
+        
+        .filter-select {
+            appearance: none;
+            -webkit-appearance: none;
+            background: #f8fafc url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 7px 34px 7px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+            min-width: 150px;
+            flex: 1;
+            max-width: 280px;
+        }
+        
+        .filter-select:hover {
+            border-color: #94a3b8;
+        }
+        
+        .filter-select:focus {
+            border-color: var(--p2-accent-global);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        #view-competitor .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--p2-timeline-line);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        #view-competitor .columns-wrapper {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        #view-competitor .column {
+            width: 47%;
+            position: relative;
+        }
+        
+        #view-competitor .col-header {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            padding: 12px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 10;
+            border-bottom: 4px solid;
+        }
+        
+        #view-competitor .tw-header {
+            color: var(--p2-accent-tw);
+            border-color: var(--p2-accent-tw);
+        }
+        
+        #view-competitor .global-header {
+            color: var(--p2-accent-global);
+            border-color: var(--p2-accent-global);
+        }
+        
+        #view-competitor .card {
+            background: var(--p2-card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--p2-timeline-line);
+            position: relative;
+            transition: transform 0.2s;
+        }
+        
+        #view-competitor .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        #view-competitor .tw-col .card {
+            border-top: 5px solid var(--p2-accent-tw);
+        }
+        
+        #view-competitor .global-col .card {
+            border-top: 5px solid var(--p2-accent-global);
+        }
+        
+        #view-competitor .card::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            z-index: 5;
+        }
+        
+        #view-competitor .tw-col .card::after {
+            right: -44px;
+            border: 4px solid var(--p2-accent-tw);
+        }
+        
+        #view-competitor .global-col .card::after {
+            left: -44px;
+            border: 4px solid var(--p2-accent-global);
+        }
+        
+        #view-competitor .meta-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        #view-competitor .date-badge {
+            background-color: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        
+        #view-competitor .company {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        
+        #view-competitor .product-title {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.4;
+        }
+        
+        #view-competitor .user-case {
+            font-size: 15px;
+            color: #475569;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        #view-competitor .insight-box {
+            background-color: var(--p2-insight-bg);
+            border-left: 4px solid var(--p2-insight-border);
+            padding: 15px;
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 15px;
+        }
+        
+        #view-competitor .insight-title {
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            color: #b45309;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        #view-competitor .insight-text {
+            margin: 0;
+            font-size: 13px;
+            color: #78350f;
+        }
+        
+        #view-competitor .source-link {
+            display: inline-flex;
+            align-items: center;
+            font-size: 12px;
+            color: #64748b;
+            text-decoration: none;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 12px;
+            width: 100%;
+        }
+        
+        #view-competitor .source-link:hover {
+            color: var(--p2-accent-global);
+            text-decoration: underline;
+        }
+        
+        #view-competitor .hidden {
+            display: none !important;
+        }
+        /* ===== 手機 Tab Bar：桌機隱藏 ===== */
+        
+        .competitor-tabs {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            #view-competitor .container::before {
+                display: none;
+            }
+            #view-competitor .columns-wrapper {
+                flex-direction: column;
+            }
+            #view-competitor .column {
+                width: 100%;
+            }
+            #view-competitor .card::after {
+                display: none;
+            }
+            #view-competitor .tw-col {
+                margin-bottom: 10px;
+            }
+            /* 手機隱藏雙欄標題，tab 已取代其功能 */
+            #view-competitor .col-header {
+                display: none;
+            }
+            /* Tab Bar */
+            .competitor-tabs {
+                display: flex;
+                margin: 0 12px 0;
+                background: #f1f5f9;
+                border-radius: 10px;
+                padding: 4px;
+                gap: 4px;
+            }
+            .ctab {
+                flex: 1;
+                padding: 9px 0;
+                border: none;
+                border-radius: 7px;
+                background: transparent;
+                font-size: 14px;
+                font-weight: 600;
+                color: #64748b;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .ctab.active {
+                background: white;
+                color: var(--p2-header-bg);
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+            }
+            /* 預設：手機上隱藏其中一欄，由 JS 控制 */
+            #view-competitor .column.tab-hidden {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="nav-container">
+        <button class="nav-btn active" data-target="view-q1" onclick="switchView('q1')">
+            <span>📑</span> Q1 報告
+        </button>
+        <button class="nav-btn" data-target="view-weekly" onclick="switchView('weekly')">
+            <span>📊</span> AI Trend Weekly
+        </button>
+        <button class="nav-btn" data-target="view-competitor" onclick="switchView('competitor')">
+            <span>🌍</span> 同業追蹤 Watch
+        </button>
+    </div>
+
+    <div id="view-q1" class="view-section active">
+        <style>
+            #view-q1 {
+                background-color: #f4f7f6;
+                color: #2d3748;
+                padding: 30px 20px;
+                box-sizing: border-box;
+                min-height: 100vh;
+            }
+            #view-q1 .q1-container {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+            #view-q1 h1 {
+                text-align: center;
+                font-size: 28px;
+                font-weight: 700;
+                color: #1a202c;
+                margin-bottom: 40px;
+                letter-spacing: 1px;
+            }
+            #view-q1 h2 {
+                font-size: 20px;
+                font-weight: 600;
+                color: #2b6cb0;
+                margin-top: 40px;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #e2e8f0;
+            }
+            #view-q1 .q1-card {
+                background-color: #ffffff;
+                border-radius: 8px;
+                padding: 24px 32px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.05);
+                margin-bottom: 24px;
+                border: 1px solid #e2e8f0;
+            }
+            #view-q1 ul { margin: 0; padding-left: 20px; }
+            #view-q1 li { margin-bottom: 12px; }
+            #view-q1 li::marker { color: #2b6cb0; }
+            #view-q1 strong { color: #1a202c; }
+            
+            /* 時間軸樣式 */
+            #view-q1 .q1-timeline {
+                position: relative;
+                padding-left: 20px;
+                margin-top: 20px;
+            }
+            #view-q1 .q1-timeline::before {
+                content: '';
+                position: absolute;
+                top: 0; bottom: 0; left: 4px;
+                width: 2px;
+                background-color: #e2e8f0;
+            }
+            #view-q1 .q1-timeline-item {
+                position: relative;
+                margin-bottom: 24px;
+            }
+            #view-q1 .q1-timeline-item:last-child { margin-bottom: 0; }
+            #view-q1 .q1-timeline-dot {
+                position: absolute;
+                left: -21px; top: 6px;
+                width: 10px; height: 10px;
+                border-radius: 50%;
+                background-color: #2b6cb0;
+                border: 2px solid #ffffff;
+            }
+            #view-q1 .q1-timeline-date {
+                font-size: 14px;
+                font-weight: 600;
+                color: #2b6cb0;
+                margin-bottom: 4px;
+            }
+            #view-q1 .q1-timeline-content {
+                font-size: 15px;
+                color: #718096;
+            }
+            #view-q1 .q1-timeline-content strong {
+                color: #2d3748;
+                display: block;
+                margin-bottom: 4px;
+            }
+            
+            /* 巨頭網格樣式 */
+            #view-q1 .q1-grid-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+            }
+            #view-q1 .q1-giant-card h3 {
+                margin-top: 0;
+                font-size: 18px;
+                color: #1a202c;
+                border-bottom: 1px solid #e2e8f0;
+                padding-bottom: 12px;
+                margin-bottom: 16px;
+            }
+            #view-q1 .q1-feature-list {
+                list-style: none;
+                padding: 0; margin: 0;
+            }
+            #view-q1 .q1-feature-list li {
+                font-size: 14px;
+                margin-bottom: 14px;
+                display: flex;
+                align-items: flex-start;
+            }
+            #view-q1 .q1-tag {
+                background-color: #edf2f7;
+                color: #4a5568;
+                font-size: 12px;
+                font-weight: 600;
+                padding: 4px 8px;
+                border-radius: 4px;
+                margin-right: 12px;
+                white-space: nowrap;
+            }
+            #view-q1 .q1-feature-text {
+                flex: 1;
+                color: #718096;
+                line-height: 1.5;
+            }
+            /* 手機版排版微調 */
+            @media (max-width: 600px) {
+                #view-q1 { padding: 20px 10px; }
+                #view-q1 .q1-card { padding: 18px 20px; }
+                #view-q1 h1 { font-size: 24px; margin-bottom: 20px; }
+            }
+        </style>
+
+        <div class="q1-container">
+            <h1>2026 Q1 AI 產業季度總覽</h1>
+
+            <h2>三大核心趨勢摘要</h2>
+            <div class="q1-card">
+                <ul>
+                    <li><strong>Agentic AI 成為核心與職能重塑：</strong>AI 戰略從被動問答轉向主動執行（如 OpenAI 轉型「個人超級助理」、Anthropic 推出 Claude Coworker），企業端催生出「AI PM」新職能，但也面臨「AI 生產力悖論」的挑戰。</li>
+                    <li><strong>算力即貨幣與自研晶片大戰：</strong>NVIDIA 透過 Rubin 平台確立算力霸權，而微軟（Maia 200）、Google 與 Anthropic（TPU 協議）等巨頭則積極佈局自研晶片與基礎建設，加速「去 NVIDIA 化」。</li>
+                    <li><strong>生態系深度結盟與資安治理：</strong>Apple 與 Google 達成 Gemini 驅動 Siri 的核心底層結盟；同時，Anthropic 透過發布「AI 憲法」及防堵惡意攻擊，搶佔行業治理與防護的話語權。</li>
+                </ul>
+            </div>
+
+            <h2>月度重大事件時間軸</h2>
+            <div class="q1-card">
+                <div class="q1-timeline">
+                    <div class="q1-timeline-item">
+                        <div class="q1-timeline-dot"></div>
+                        <div class="q1-timeline-date">01 月 W2 (約 01/09)</div>
+                        <div class="q1-timeline-content">
+                            <strong>CES 2026 開幕與算力宣言</strong>
+                            黃仁勳發表 Rubin 平台（記憶體頻寬較 Blackwell 提升 2 倍），宣告算力即貨幣時代；Anthropic 同步宣布百億融資（估值 3,500 億）。
+                        </div>
+                    </div>
+                    <div class="q1-timeline-item">
+                        <div class="q1-timeline-dot"></div>
+                        <div class="q1-timeline-date">01 月 W2-W3 (約 01/15)</div>
+                        <div class="q1-timeline-content">
+                            <strong>OpenAI 轉型與硬體佈局</strong>
+                            宣告轉型「個人超級助理」，攜鴻海推 Sweetpea AI 耳機；軟銀完成對 OpenAI 410 億美元投資，取得 11% 股權。
+                        </div>
+                    </div>
+                    <div class="q1-timeline-item">
+                        <div class="q1-timeline-dot"></div>
+                        <div class="q1-timeline-date">01 月 W3-W4 (約 01/23)</div>
+                        <div class="q1-timeline-content">
+                            <strong>Apple × Google 達成多年結盟</strong>
+                            確認 Siri 以 Gemini 為核心底層（15 億次/日請求）；Apple 收購以色列新創 Q.ai 強化邊緣推論；Anthropic 發布 AI 憲法。
+                        </div>
+                    </div>
+                    <div class="q1-timeline-item">
+                        <div class="q1-timeline-dot"></div>
+                        <div class="q1-timeline-date">01 月 W5 (約 01/30)</div>
+                        <div class="q1-timeline-content">
+                            <strong>自研晶片與人力市場震撼彈</strong>
+                            微軟推 Maia 200 自研晶片（去 NVIDIA 化趨勢確立）；Anthropic CEO 預言工程師一年內被取代；Google 推 260 元/月低價 AI Plus 訂閱。
+                        </div>
+                    </div>
+                    <div class="q1-timeline-item">
+                        <div class="q1-timeline-dot"></div>
+                        <div class="q1-timeline-date">02 月 W1-W2 (約 02/11)</div>
+                        <div class="q1-timeline-content">
+                            <strong>資本暴衝與流量變現</strong>
+                            Alphabet 發行百年債券，Google 資本支出暴衝至 1,850 億美元；ChatGPT 開始測試廣告機制，LLM 進入流量變現時代。
+                        </div>
+                    </div>
+                    <div class="q1-timeline-item">
+                        <div class="q1-timeline-dot"></div>
+                        <div class="q1-timeline-date">02 月 W4 (約 02/26)</div>
+                        <div class="q1-timeline-content">
+                            <strong>財報超標與 AI 代理趨勢報告</strong>
+                            NVIDIA 財測 780 億超標；Anthropic 推 Claude Coworker 鎖定投行；AMD 獲 Meta 晶片大單；Google 發布報告指出 97% 工作者用 AI 每週省時不足 2 小時。
+                        </div>
+                    </div>
+                    <div class="q1-timeline-item">
+                        <div class="q1-timeline-dot"></div>
+                        <div class="q1-timeline-date">03 月中旬 (約 03/13 - 03/20)</div>
+                        <div class="q1-timeline-content">
+                            <strong>GTC 大會與開源代理框架發酵</strong>
+                            NVIDIA 發表 Vera Rubin 全棧超算與 NemoClaw 代理框架；同時期 OpenClaw 相關動態於開源代理框架社群中發酵，與巨頭生態系產生交互影響。
+                        </div>
+                    </div>
+                    <div class="q1-timeline-item">
+                        <div class="q1-timeline-dot"></div>
+                        <div class="q1-timeline-date">04 月上旬 (約 04/02 - 04/09)</div>
+                        <div class="q1-timeline-content">
+                            <strong>估值攀升與開源模型反擊</strong>
+                            OpenAI 資金追加至 1,220 億（估值 8,520 億）；Google 發布 Gemma 4 (Apache 2.0) 模型。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>各巨頭本季大事記</h2>
+            <div class="q1-grid-container">
+                <div class="q1-card q1-giant-card">
+                    <h3>OpenAI</h3>
+                    <ul class="q1-feature-list">
+                        <li><span class="q1-tag">戰略</span><div class="q1-feature-text">宣告從聊天機器人轉型「個人超級助理」，Agentic AI 成核心。</div></li>
+                        <li><span class="q1-tag">資金</span><div class="q1-feature-text">3 月完成 1,100 億融資，4 月追加至 1,220 億，估值 8,520 億；IPO 目標 Q4 2026。</div></li>
+                        <li><span class="q1-tag">硬體</span><div class="q1-feature-text">攜鴻海推 Sweetpea AI 耳機，搶佔語音入口；Codex MacOS 版上線。</div></li>
+                        <li><span class="q1-tag">決策</span><div class="q1-feature-text">關閉 Sora 影片模型止血，資源全數回撥 AGI 推理核心。</div></li>
+                        <li><span class="q1-tag">政策</span><div class="q1-feature-text">發布 AI 稅、全民財富基金及四天工作制政策白皮書。</div></li>
+                    </ul>
+                </div>
+                <div class="q1-card q1-giant-card">
+                    <h3>Anthropic</h3>
+                    <ul class="q1-feature-list">
+                        <li><span class="q1-tag">財務</span><div class="q1-feature-text">年化營收三個月從 90 億翻至 300 億，超越 OpenAI (250 億)。</div></li>
+                        <li><span class="q1-tag">算力</span><div class="q1-feature-text">與 Google 及 Broadcom 簽 3.5GW TPU 協議，總承諾逾 4.5GW。</div></li>
+                        <li><span class="q1-tag">產品</span><div class="q1-feature-text">Claude 獲電腦操控 (Computer Use) 與 Dispatch 手機遙控能力；Claude Cowork 鎖定投行。</div></li>
+                        <li><span class="q1-tag">資安</span><div class="q1-feature-text">Project Glasswing：Claude Mythos 自主發現主流 OS 所有零日漏洞。</div></li>
+                        <li><span class="q1-tag">治理</span><div class="q1-feature-text">發布 AI 憲法；牽頭三大巨頭聯防中國蒸餾竊取 (1,600 萬次攻擊請求)。</div></li>
+                    </ul>
+                </div>
+                <div class="q1-card q1-giant-card">
+                    <h3>Google / DeepMind</h3>
+                    <ul class="q1-feature-list">
+                        <li><span class="q1-tag">資金</span><div class="q1-feature-text">2026 年資本支出上調至 1,850 億；Alphabet 發行百年債券鎖定長期資金。</div></li>
+                        <li><span class="q1-tag">結盟</span><div class="q1-feature-text">與 Apple 達成多年合作，Gemini 驅動 Siri (15 億次/日請求分發優勢)。</div></li>
+                        <li><span class="q1-tag">模型</span><div class="q1-feature-text">4 月發布 Gemma 4 (Apache 2.0)，31B 模型登 Arena AI 第 3；AIME 測試躍至 89.2%。</div></li>
+                        <li><span class="q1-tag">產品</span><div class="q1-feature-text">Gemini 植入 Chrome 側欄；Google Stitch「Vibe Design」重塑 UI 設計流程。</div></li>
+                    </ul>
+                </div>
+                <div class="q1-card q1-giant-card">
+                    <h3>NVIDIA</h3>
+                    <ul class="q1-feature-list">
+                        <li><span class="q1-tag">晶片</span><div class="q1-feature-text">CES 揭露 Rubin 平台 (記憶體頻寬 ×2 vs Blackwell)，2026 下半年出貨。</div></li>
+                        <li><span class="q1-tag">財報</span><div class="q1-feature-text">780 億美元財測超標 (+5%)，算力超級循環確認未見頂。</div></li>
+                        <li><span class="q1-tag">GTC</span><div class="q1-feature-text">1 兆美元訂單宣言；Vera Rubin 全棧超算 (每瓦效能 ×50) 與 NemoClaw 代理框架。</div></li>
+                        <li><span class="q1-tag">生態</span><div class="q1-feature-text">投資 Marvell 20 億強化 ASIC；台廠全面升級為 AI 工廠系統整合商。</div></li>
+                    </ul>
+                </div>
+                <div class="q1-card q1-giant-card">
+                    <h3>Apple</h3>
+                    <ul class="q1-feature-list">
+                        <li><span class="q1-tag">結盟</span><div class="q1-feature-text">確認以 Google Gemini 為 Siri 核心底層，獲得強大模型支援。</div></li>
+                        <li><span class="q1-tag">併購</span><div class="q1-feature-text">斥資 20 億美元收購 Q.ai，填補邊緣推論與 Siri AI 短板。</div></li>
+                    </ul>
+                </div>
+                <div class="q1-card q1-giant-card">
+                    <h3>Meta</h3>
+                    <ul class="q1-feature-list">
+                        <li><span class="q1-tag">硬體</span><div class="q1-feature-text">向 AMD 投下晶片大單，帶動 AMD 股價單日飆漲 8.8%。</div></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>金融業核心啟示</h2>
+            <div class="q1-card">
+                <ul>
+                    <li><strong>應對「AI 生產力悖論」並設立 AI PM：</strong>Google 報告點出多數工作者每週省時不足 2 小時。金融業不能僅採購工具，必須設立「AI PM」重塑工作流程，定義明確的自動化目標。</li>
+                    <li><strong>導入 Agentic AI 執行高階任務：</strong>隨著 Anthropic 推出鎖定投行的 Claude Coworker，金融業應將 AI 應用從基礎客服轉向自主任務執行（如財報初步分析、合規文件比對）。</li>
+                    <li><strong>落實白盒化與資安防護：</strong>AI 取得電腦操控權限後，資安風險大增。金融機構應參考巨頭的「AI 憲法」，建立本地防護網與合規治理機制，確保決策過程的透明與可解釋性。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-weekly" class="view-section">
+        <div class="container">
+            <div class="banner">
+                <h1>AI Trend Weekly</h1>
+                <p>洞察・趨勢 | 2026 年 04 月 第 2 週</p>
+            </div>
+
+            <div class="trend-summary">
+                <div class="section-header"><span>📉</span> 本週趨勢摘要 (Executive Summary)</div>
+                <p class="summary-text">本週 AI 產業迎來「戰略加速與安全博弈」的雙重引爆點。資金面，OpenAI 以 1,220 億美元刷新史上最大融資紀錄，Broadcom 則用 3.5GW 算力協議為 Google 與 Anthropic 的競爭軍備夯實硬體基礎；模型面，Google Gemma 4 以 Apache 2.0 開源授權重塑開源生態遊戲規則，Meta 的 Muse Spark 則宣告矽谷的開源免費時代正在收攤。安全面，Anthropic Project Glasswing 揭示 AI 的漏洞發現能力已進入「超人類」等級，三大巨頭聯手對抗中國蒸餾竊取更將 AI 競爭帶入地緣政治維度。而 OpenAI 提出的「AI 稅」政策白皮書與緬因州擬禁大型資料中心，則點燃了 AI 監管的社會火線。對金融業而言，這一週的核心訊號是：算力已成主權資產、AI 資安從合規要求升格為生死存亡問題，而「誰的模型被竊取、誰的基礎設施不被允許建設」，將決定下一個十年的 AI 競爭格局。</p>
+            </div>
+
+            <div class="exec-analysis" id="analysisCarousel">
+                <div class="analysis-carousel-track">
+                    <div class="analysis-carousel-inner" id="analysisInner">
+
+                        <div class="analysis-card">
+                            <div class="analysis-title">算力即主權：資金洪流重塑 AI 基礎設施版圖</div>
+                            <div class="analysis-content">
+                                <p>本週三件資金大事——OpenAI 完成 1,220 億美元融資、Broadcom 確認 3.5GW TPU 算力協議、Meta Muse Spark 背後 1,150 億美元資本支出——共同指向同一個結論：AI 基礎設施競爭已從「誰有最強模型」演進為「誰能鎖定未來十年的算力供應鏈」。對金融機構而言，這波資金浪潮衍生的台積電、Broadcom 供應鏈機會，遠比模型本身更具投資確定性。<a onclick="jumpToNews(8)" class="analysis-link">詳見OpenAI融資</a><a onclick="jumpToNews(5)" class="analysis-link">詳見Broadcom</a></p>
+                            </div>
+                        </div>
+
+                        <div class="analysis-card">
+                            <div class="analysis-title">AI 資安進入「攻守失衡」新紀元</div>
+                            <div class="analysis-content">
+                                <p>Anthropic Project Glasswing 用 Claude Mythos 自主發現數千個主流 OS 零日漏洞，同週三大 AI 巨頭聯手對抗中國蒸餾竊取。這兩個事件合讀的含義是：AI 已能以超越人類的速度發現並利用漏洞，防禦端若不即時跟上，金融核心系統將面臨前所未有的風險。JPMorganChase 已加入 Glasswing 聯盟——這是金融業必須跟進的明確訊號。<a onclick="jumpToNews(2)" class="analysis-link">詳見Glasswing</a><a onclick="jumpToNews(4)" class="analysis-link">詳見蒸餾竊取</a></p>
+                            </div>
+                        </div>
+
+                        <div class="analysis-card">
+                            <div class="analysis-title">監管壓力兩極化：AI 稅與資料中心禁令的政治訊號</div>
+                            <div class="analysis-content">
+                                <p>OpenAI 提出向企業課「AI 稅」並分紅全民，同週緬因州擬成為全美首個禁建大型資料中心的州，顯示 AI 的政治阻力正從「監管模型」擴大到「管制基礎設施」。金融業在規劃地端部署與雲端選址時，必須將「電力政治風險」列入評估——台灣的資料主權法規與電網穩定性，在這個脈絡下反而成為競爭優勢。<a onclick="jumpToNews(1)" class="analysis-link">詳見OpenAI政策</a><a onclick="jumpToNews(6)" class="analysis-link">詳見緬因州禁令</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="analysis-dots" id="analysisDots">
+                <button class="analysis-dot active" onclick="goToAnalysis(0)"></button>
+                <button class="analysis-dot" onclick="goToAnalysis(1)"></button>
+                <button class="analysis-dot" onclick="goToAnalysis(2)"></button>
+            </div>
+
+            <div class="news-section" id="news-section-anchor">
+                <div class="news-list">
+
+                    <div class="news-item active" onclick="openTab(1)">
+                        <div class="news-item-header"><span class="news-num">01.</span></div>
+                        <div class="news-list-title">AI衝擊就業怎麼辦？OpenAI拋政策：向企業課「AI稅」，再分紅全民、鼓勵縮工時</div>
+                        <div class="news-list-summary">OpenAI 發布 13 頁政策白皮書，建議課機器人稅、設立全民財富基金、試行四天工作制，應對 AI 引發的大規模就業衝擊。</div>
+                    </div>
+
+                    <div class="news-item" onclick="openTab(2)">
+                        <div class="news-item-header"><span class="news-num">02.</span></div>
+                        <div class="news-list-title">Anthropic Project Glasswing：Claude Mythos 發現所有主流 OS 零日漏洞</div>
+                        <div class="news-list-summary">Anthropic 確認 Claude Mythos Preview 已自主發現並利用每個主流 OS 及瀏覽器的零日漏洞，資安界進入 AI 主導防禦的新紀元。</div>
+                    </div>
+
+                    <div class="news-item" onclick="openTab(3)">
+                        <div class="news-item-header"><span class="news-num">03.</span></div>
+                        <div class="news-list-title">Anthropic發布Claude Mythos Preview，AI資安能力直逼頂尖人類駭客並啟動全球資安防禦計畫</div>
+                        <div class="news-list-summary">Anthropic 推出 Project Glasswing，以未發布旗艦模型 Claude Mythos 發現主流 OS 數千零日漏洞，聯合 12 家巨頭共同防禦。</div>
+                    </div>
+
+                    <div class="news-item" onclick="openTab(4)">
+                        <div class="news-item-header"><span class="news-num">04.</span></div>
+                        <div class="news-list-title">Meta推出閉源AI模型Muse Spark：汪滔花9個月從零重做，為何不再免費開源了？</div>
+                        <div class="news-list-summary">Meta 超級智慧實驗室推出 Muse Spark，首度試探付費 API，打破純開源路線，2026 年 AI 資本支出上看 1,150 億美元。</div>
+                    </div>
+
+                    <div class="news-item" onclick="openTab(5)">
+                        <div class="news-item-header"><span class="news-num">05.</span></div>
+                        <div class="news-list-title">OpenAI、Anthropic、Google 聯手對抗中國 AI「蒸餾竊取」</div>
+                        <div class="news-list-summary">三大 AI 龍頭透過 Frontier Model Forum 共享威脅情報，鎖定 DeepSeek 等三間中國公司以 2.4 萬詐欺帳號大規模複製模型能力。</div>
+                    </div>
+
+                    <div class="news-item" onclick="openTab(6)">
+                        <div class="news-item-header"><span class="news-num">06.</span></div>
+                        <div class="news-list-title">Broadcom 擴大與 Google、Anthropic 晶片合作</div>
+                        <div class="news-list-summary">Broadcom 向 SEC 申報，確認為 Google 開發下一代 TPU，並給予 Anthropic 3.5GW 算力，Mizuho 估 Broadcom 2027 年 AI 營收達 420 億美元。</div>
+                    </div>
+
+                    <div class="news-item" onclick="openTab(7)">
+                        <div class="news-item-header"><span class="news-num">07.</span></div>
+                        <div class="news-list-title">全美首例》緬因州擬禁建大型資料中心，AI 太耗電民怨沸騰</div>
+                        <div class="news-list-summary">緬因州議會擬通過法案，成為全美首個對大型 AI 資料中心實施暫停令的州，凸顯 AI 能源消耗引發的社會與政治阻力。</div>
+                    </div>
+
+                    <div class="news-item" onclick="openTab(8)">
+                        <div class="news-item-header"><span class="news-num">08.</span></div>
+                        <div class="news-list-title">OpenAI完成1220億美元融資，估值達8520億美元，創下史上最大AI融資</div>
+                        <div class="news-list-summary">OpenAI 完成史上最大科技融資，由 Amazon（500 億）、NVIDIA 與 SoftBank（各 300 億）領投，首度開放個人透過銀行渠道參與。</div>
+                    </div>
+
+                    <div class="news-item" onclick="openTab(9)">
+                        <div class="news-item-header"><span class="news-num">09.</span></div>
+                        <div class="news-list-title">Google DeepMind 發布 Gemma 4：開源旗艦，首採 Apache 2.0 商用授權</div>
+                        <div class="news-list-summary">Google DeepMind 發布四種尺寸的 Gemma 4，首採 Apache 2.0 完全商用授權，31B 模型在 Arena AI 排行榜位居第 3，可在手機端運行。</div>
+                    </div>
+
+                </div>
+
+                <div id="tab-content-container">
+
+                    <div id="tab-1" class="tab-content active">
+                        <div class="detail-header">
+                            <h2 class="detail-title">AI衝擊就業怎麼辦？OpenAI拋政策：向企業課「AI稅」，再分紅全民、鼓勵縮工時</h2>
+                            <div class="tags"><span class="tag">#AI政策</span><span class="tag">#機器人稅</span><span class="tag">#就業衝擊</span><span class="tag">#監管趨勢</span></div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">⚡ 重點速報</div>
+                            <div class="highlight-box">OpenAI 發布 13 頁政策白皮書《智能時代的產業政策：以人為先》，CEO Sam Altman 接受 Axios 專訪時以「urgency（緊迫感）」定調，建議政府對使用 AI 取代勞工的企業課「機器人稅」，設立全民財富基金並向 AI 公司部分出資，同時鼓勵企業試行薪資不變的四天工作制，以因應超級 AI 即將到來的就業衝擊。</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">📊 關鍵細節</div>
+                            <ul class="detail-list">
+                                <li><strong>機器人稅提案：</strong> 建議將稅收負擔從勞動力轉移到資本，對企業收入和高層資本利得課較高稅率，並可能對取代人類的機器人課等額稅款，以維持社會保障基金來源。</li>
+                                <li><strong>全民財富基金：</strong> 由政府管理、AI 公司部分出資，投資 AI 及採用 AI 的企業，將回報直接分發予全體公民，類似阿拉斯加永久基金模式。</li>
+                                <li><strong>四天工作制（週 32 小時不減薪）：</strong> 鼓勵企業試行，視之為 AI 帶動生產力提升後的效率紅利，並建立當 AI 失業指標達門檻時自動觸發的安全網機制。</li>
+                                <li><strong>時間點敏感：</strong> 白皮書發布前一週，OpenAI 剛完成 1,220 億美元融資，批評者指出此舉是 AI 巨頭在監管壓力前先行搶占定位的公關操作。</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">🎯 產業連動與標的 (Impact Analysis)</div>
+                            <div class="impact-container">
+                                <div class="impact-row risk">
+                                    <div class="impact-meta"><span class="impact-industry">[風險] 高度自動化企業（金融業包含）</span><span class="impact-tickers">銀行、保險業</span></div>
+                                    <p class="impact-reason">若機器人稅立法成真，金融業因大量使用 AI 取代法遵、客服、徵信人力，將成為被課稅的主要產業之一，需提前評估潛在稅務負擔。</p>
+                                </div>
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] 人力資源科技與再培訓平台</span><span class="impact-tickers">相關 EdTech、HRTech</span></div>
+                                    <p class="impact-reason">政策若推動 AI 時代勞工再培訓，將帶動人才發展平台與企業內訓解決方案的需求大幅提升。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">💡 策略解讀</div>
+                            <div class="strategy-box">
+                                <p class="strategy-text">OpenAI 的白皮書本質上是一張「道德先機牌」：在監管立法到來前，先提出自己的政策框架，搶奪輿論制高點。對金融業而言，這份文件的真正意義不在於「機器人稅會不會立法」，而在於「AI 取代就業的社會壓力正在加速政治化」。金融機構的 HR 與法務部門應即刻啟動「AI 導入的勞動影響評估」，並在對外溝通策略中提前準備相關說明，避免在監管浪潮來臨時措手不及。此外，Anthropic 早於六個月前已發布類似政策方向——這兩大巨頭的背書，意味著相關監管討論的速度將比預期更快。</p>
+                            </div>
+                        </div>
+                        <a href="https://www.bnext.com.tw/article/90533/openai-intelligence-age-industrial-policy" target="_blank" class="read-source-btn">閱讀原始文章 ↗</a>
+                    </div>
+
+                    <div id="tab-2" class="tab-content">
+                        <div class="detail-header">
+                            <h2 class="detail-title">Anthropic Project Glasswing：Claude Mythos 發現所有主流 OS 零日漏洞</h2>
+                            <div class="tags"><span class="tag">#AI資安</span><span class="tag">#零日漏洞</span><span class="tag">#Claude Mythos</span><span class="tag">#資安防禦</span></div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">⚡ 重點速報</div>
+                            <div class="highlight-box">Anthropic 官方技術部落格揭露，Claude Mythos Preview 已在測試過程中對每個主流作業系統和每個主要網路瀏覽器完成零日漏洞發現與自主利用，包含串連 4 個漏洞的複合瀏覽器攻擊鏈，以及一個存在 27 年的 FreeBSD 遠端執行漏洞（CVE-2026-4747）。Anthropic 強調目前超過 99% 的已發現漏洞尚未修補，因此選擇限制模型存取並先行推進防禦計畫。</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">📊 關鍵細節</div>
+                            <ul class="detail-list">
+                                <li><strong>漏洞串連能力：</strong> Mythos 可自動串連多個單一無法利用的漏洞，形成可完整攻擊目標系統的複合攻擊鏈，這是過去 AI 系統從未達到的能力邊界。</li>
+                                <li><strong>27 年歷史漏洞：</strong> 在 OpenBSD 中發現存在 27 年的漏洞，代表 AI 能夠系統性掃描人類花費數十年都未發現的代碼缺陷，傳統資安審計的局限性一覽無遺。</li>
+                                <li><strong>Anthropic 提供 1 億美元支援：</strong> 承諾向 Project Glasswing 夥伴提供最多 1 億美元的模型使用額度，另額外捐款 400 萬美元給開源資安組織。</li>
+                                <li><strong>90 天報告承諾：</strong> Anthropic 承諾在計畫啟動 90 天內（即 2026 年 7 月初）公布 Glasswing 的成果報告，預計引發大規模修補潮。</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">🎯 產業連動與標的 (Impact Analysis)</div>
+                            <div class="impact-container">
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] 資安軟體與漏洞管理廠商</span><span class="impact-tickers">CrowdStrike (CRWD), Qualys</span></div>
+                                    <p class="impact-reason">AI 驅動的大規模漏洞發現將帶動前所未有的補丁管理需求，企業的漏洞掃描與修補預算將顯著提升。</p>
+                                </div>
+                                <div class="impact-row risk">
+                                    <div class="impact-meta"><span class="impact-industry">[風險] 開源軟體深度依賴的金融系統</span><span class="impact-tickers">使用 OpenBSD, Linux 核心系統的機構</span></div>
+                                    <p class="impact-reason">金融核心系統若大量採用 Glasswing 掃描過但尚未公布修補的開源元件，在 7 月報告公布後將面臨集中式的修補壓力，需提前啟動應急計畫。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">💡 策略解讀</div>
+                            <div class="strategy-box">
+                                <p class="strategy-text">此事件是對整個資安產業的一次震撼教育。Anthropic 的 Nicholas Carlini 表示：「我在過去幾週內發現的漏洞，比我餘生加起來發現的還多。」這句話的意義深遠：它意味著 AI 資安能力的門檻已經跨越，而且這個能力很快就會擴散到攻擊者手中。金融機構的資安長必須在 2026 年 7 月報告公布前完成三件事：一、清查所有核心系統所使用的開源 OS 與瀏覽器版本，評估修補應急計畫；二、與現有資安供應商確認其是否有加入 Glasswing 計畫或獲得相關情報；三、提前向董事會報告 AI 驅動資安攻擊的新型態風險，爭取提升資安預算的授權。</p>
+                            </div>
+                        </div>
+                        <a href="https://www.anthropic.com/glasswing" target="_blank" class="read-source-btn">閱讀原始文章 ↗</a>
+                    </div>
+
+                    <div id="tab-3" class="tab-content">
+                        <div class="detail-header">
+                            <h2 class="detail-title">Anthropic發布Claude Mythos Preview，AI資安能力直逼頂尖人類駭客並啟動全球資安防禦計畫</h2>
+                            <div class="tags"><span class="tag">#AI資安</span><span class="tag">#零日漏洞</span><span class="tag">#Project Glasswing</span><span class="tag">#Claude Mythos</span></div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">⚡ 重點速報</div>
+                            <div class="highlight-box">Anthropic 發布 Project Glasswing，以未公開旗艦模型 Claude Mythos Preview 主動掃描全球關鍵軟體，已自主發現每個主流作業系統與瀏覽器中數千個零日漏洞，包含一個存在 27 年的 OpenBSD 遠端執行漏洞。聯盟成員涵蓋 AWS、Apple、Cisco、CrowdStrike、Google、JPMorganChase、Microsoft、NVIDIA 共 12 家機構，並承諾 1 億美元使用額度與 400 萬美元開源捐款。</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">📊 關鍵細節</div>
+                            <ul class="detail-list">
+                                <li><strong>能力突破：</strong> Mythos Preview 可自主串連多個漏洞形成複合攻擊鏈，包含一個 17 年歷史的 FreeBSD 遠端執行漏洞，且全程無人工介入，突破過去 AI 的漏洞發現上限。</li>
+                                <li><strong>金融機構已入場：</strong> JPMorganChase 為 12 家創始夥伴之一，意味著 AI 資安防禦已被全球頂級金融機構視為核心基礎設施投資。</li>
+                                <li><strong>雙刃劍警示：</strong> Anthropic 私下已警告美國政府官員：Mythos 的能力將使大規模 AI 驅動網路攻擊在今年內極有可能發生。</li>
+                                <li><strong>EU AI Act 連動：</strong> 歐盟 AI Act 高風險系統資安要求將於 2026 年 8 月生效，Project Glasswing 的成果正好為企業提供合規框架的實務參考。</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">🎯 產業連動與標的 (Impact Analysis)</div>
+                            <div class="impact-container">
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] 網路資安廠商</span><span class="impact-tickers">CrowdStrike, Palo Alto Networks</span></div>
+                                    <p class="impact-reason">CrowdStrike 為創始夥伴，AI 驅動的漏洞發現浪潮將帶動端點防護與零信任架構的大幅採購，資安支出預算上升確定性高。</p>
+                                </div>
+                                <div class="impact-row risk">
+                                    <div class="impact-meta"><span class="impact-industry">[風險] 未加入防禦聯盟的金融機構</span><span class="impact-tickers">中小型銀行、保險業</span></div>
+                                    <p class="impact-reason">未能取得 Mythos Preview 掃描的機構，其核心系統的漏洞將在下一代 AI 模型普及後面臨不對稱風險，補救成本將遠高於現在的防禦投入。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">💡 策略解讀</div>
+                            <div class="strategy-box">
+                                <p class="strategy-text">Project Glasswing 代表 AI 資安從「被動防禦」演進到「主動攻防」的歷史性轉折點。對金融機構而言，這不只是一個資安新聞——JPMorganChase 加入的決策明確說明：頂級金融機構已將 AI 驅動的漏洞掃描視為核心基礎設施。台灣的數位金融團隊應立即啟動兩件事：一、清查目前使用的核心系統（含開源元件）是否在 Glasswing 的修補範圍內；二、評估與 CrowdStrike、Palo Alto 等 Glasswing 夥伴建立合規對接關係的可行性，以搶先佔據 EU AI Act 合規的技術制高點。</p>
+                            </div>
+                        </div>
+                        <a href="https://www.ithome.com.tw/news/174898" target="_blank" class="read-source-btn">閱讀原始文章 ↗</a>
+                    </div>
+
+                    <div id="tab-4" class="tab-content">
+                        <div class="detail-header">
+                            <h2 class="detail-title">Meta推出閉源AI模型Muse Spark：汪滔花9個月從零重做，為何不再免費開源了？</h2>
+                            <div class="tags"><span class="tag">#Meta</span><span class="tag">#Muse Spark</span><span class="tag">#閉源策略</span><span class="tag">#AI模型競爭</span></div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">⚡ 重點速報</div>
+                            <div class="highlight-box">Meta 超級智慧實驗室推出首款模型 Muse Spark（內部代號 Avocado），由前 Scale AI 執行長汪滔（Alexandr Wang）帶隊，9 個月從底層重建 AI 技術堆疊。模型支援文字、語音、圖片輸入，具備「沉思模式」可平行推理，目前為閉源並試探付費 API，打破 Meta 以 Llama 系列為代表的純開源路線，2026 年 AI 資本支出將達 1,150 至 1,350 億美元。</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">📊 關鍵細節</div>
+                            <ul class="detail-list">
+                                <li><strong>開源路線逆轉：</strong> 目前為閉源，僅向特定合作夥伴開放 API 私人預覽，Meta 首度在模型上試探付費營收模式，「希望」後續版本開源但不保證。</li>
+                                <li><strong>資本支出規模：</strong> Meta 2026 年 AI 資本支出將達 1,150–1,350 億美元，幾乎是去年兩倍，顯示 Meta 正押注生存等級的 AI 豪賭。</li>
+                                <li><strong>生態系分發優勢：</strong> Muse Spark 已部署於 Meta AI App、meta.ai，計畫在未來數週擴展至 Facebook、Instagram、WhatsApp、Messenger 及 Ray-Ban Meta AI 眼鏡，觸及超過 40 億用戶。</li>
+                                <li><strong>競爭差距坦承：</strong> Meta 承認在程式碼生成等領域仍落後 OpenAI 與 Anthropic，定位為「效率優先的科學式擴展第一步」。</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">🎯 產業連動與標的 (Impact Analysis)</div>
+                            <div class="impact-container">
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] Meta (META) 股價</span><span class="impact-tickers">META</span></div>
+                                    <p class="impact-reason">Meta 股價在 Muse Spark 發布後上漲逾 8%，付費 API 模式意味著 AI 業務開始從純成本中心轉為潛在營收來源，市場給予明確正向評價。</p>
+                                </div>
+                                <div class="impact-row risk">
+                                    <div class="impact-meta"><span class="impact-industry">[風險] 仰賴 Meta AI 工具的企業用戶</span><span class="impact-tickers">WhatsApp Business 用戶</span></div>
+                                    <p class="impact-reason">Meta 開始收費意味著企業在預算規劃時，需將原本視為「免費」的 AI 工具使用成本納入考量，且隱私政策對 AI 收集資料的授權範圍相當寬鬆。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">💡 策略解讀</div>
+                            <div class="strategy-box">
+                                <p class="strategy-text">Muse Spark 標誌著矽谷「開源免費」時代的落幕。當 Meta 這個曾以 Llama 開源路線為信仰的公司，都開始試探付費模式，代表整個 AI 產業正在走向「商業模式成熟化」。金融機構的啟示是雙重的：一、現在依賴「免費開源模型」建立的業務流程，將在未來面臨成本重估的風險；二、Muse Spark 部署於 WhatsApp 等金融業常用溝通管道，金融機構若在 WhatsApp Business 上整合 AI 客服，必須立即審查資料使用條款，以免客戶金融資料在不知情的情況下被用於 Meta 的模型訓練。</p>
+                            </div>
+                        </div>
+                        <a href="https://www.bnext.com.tw/article/90554/meta-muse-spark-ai-model-launch" target="_blank" class="read-source-btn">閱讀原始文章 ↗</a>
+                    </div>
+
+                    <div id="tab-5" class="tab-content">
+                        <div class="detail-header">
+                            <h2 class="detail-title">OpenAI、Anthropic、Google 聯手對抗中國 AI「蒸餾竊取」</h2>
+                            <div class="tags"><span class="tag">#地緣政治</span><span class="tag">#AI安全</span><span class="tag">#Frontier Model Forum</span><span class="tag">#對抗性蒸餾</span></div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">⚡ 重點速報</div>
+                            <div class="highlight-box">三大競爭對手 OpenAI、Anthropic、Google 史上首次透過 Frontier Model Forum 共享威脅情報，鎖定 DeepSeek、Moonshot AI、MiniMax 三家中國公司以「對抗性蒸餾」手法，透過 24,000 個詐欺帳號對 Claude 發起逾 1,600 萬次攻擊請求，系統性複製美國頂尖模型能力。美國 Trump 政府已表態支持，擬設立專責資訊共享中心。</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">📊 關鍵細節</div>
+                            <ul class="detail-list">
+                                <li><strong>攻擊規模驚人：</strong> Anthropic 記錄到三間中國公司合計 1,600 萬次攻擊請求，使用「九頭蛇（hydra cluster）」架構運作——封鎖一個帳號，立刻有另一個接替，傳統防禦難以應對。</li>
+                                <li><strong>安全護欄遭剝除：</strong> 核心風險不只是智財損失，更在於被蒸餾的模型通常不含原始模型的安全對齊機制，可能被用於政府級別的監控或輿論操控而無任何倫理限制。</li>
+                                <li><strong>反壟斷灰色地帶：</strong> 三大競爭對手共享情報面臨反壟斷法律不確定性，目前已向美國政府尋求明確法律授權，顯示此合作尚在摸索階段。</li>
+                                <li><strong>中國模型價格優勢：</strong> 中國模型 API 成本約為美國版本的 1/14，且全球 API 使用量已超越美國，蒸餾的經濟動機極為強烈。</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">🎯 產業連動與標的 (Impact Analysis)</div>
+                            <div class="impact-container">
+                                <div class="impact-row risk">
+                                    <div class="impact-meta"><span class="impact-industry">[風險] 使用中國 AI 工具的企業</span><span class="impact-tickers">DeepSeek 用戶、中台 AI 用戶</span></div>
+                                    <p class="impact-reason">若美國正式立法將對抗性蒸餾定性為違法，使用中國 AI 服務的企業將面臨供應商突然下架的風險，且其輸入的資料可能已被用於前述攻擊的訓練。</p>
+                                </div>
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] 美國 AI API 供應商</span><span class="impact-tickers">Anthropic, OpenAI, Google</span></div>
+                                    <p class="impact-reason">合規壓力將迫使企業選擇有明確資料治理承諾的美國 AI 服務商，強化其企業端市場地位。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">💡 策略解讀</div>
+                            <div class="strategy-box">
+                                <p class="strategy-text">這是 AI 競爭正式進入地緣政治維度的歷史性時刻。對台灣金融機構而言，此事件有三個立即的風險評估要點：一、盤查目前採購或試用的 AI 服務中，是否有 DeepSeek、Moonshot AI 或 MiniMax 的產品，因其使用條款及資料處理方式已受國際監管關注；二、金融機構若使用中國 AI 工具處理客戶資料，需立即審查是否違反金管會的資料不出境規範；三、未來金融機構在採購 AI 供應商時，應將「是否受美國制裁或調查」列為供應商盡職調查的必要評估項目。</p>
+                            </div>
+                        </div>
+                        <a href="https://www.business-standard.com/technology/tech-news/openai-anthropic-google-join-hands-to-combat-ai-model-copying-in-china-126040700085_1.html" target="_blank" class="read-source-btn">閱讀原始文章 ↗</a>
+                    </div>
+
+                    <div id="tab-6" class="tab-content">
+                        <div class="detail-header">
+                            <h2 class="detail-title">Broadcom 擴大與 Google、Anthropic 晶片合作</h2>
+                            <div class="tags"><span class="tag">#算力基建</span><span class="tag">#Broadcom</span><span class="tag">#Google TPU</span><span class="tag">#AI供應鏈</span></div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">⚡ 重點速報</div>
+                            <div class="highlight-box">Broadcom 向 SEC 提交 8-K 文件，確認兩項重大協議：一、與 Google 簽署長期供應保障協議，負責開發並供應下一代 TPU（代號 Ironwood）至 2031 年；二、給予 Anthropic 約 3.5GW 的 Google TPU 算力，2027 年起上線，Anthropic 現有的 1GW 協議持續供應。Mizuho 分析師估計 Broadcom 來自 Anthropic 的 AI 營收 2026 年將達 210 億、2027 年達 420 億美元。</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">📊 關鍵細節</div>
+                            <ul class="detail-list">
+                                <li><strong>算力規模：</strong> 3.5GW 為 Anthropic 現有 1GW 協議的額外追加，使 Anthropic 總算力承諾超過 4.5GW，規模相當於數座核電廠輸出。</li>
+                                <li><strong>三角結構：</strong> Google 設計 TPU 架構、Broadcom 製造實作、Anthropic 消耗算力，此三角關係讓 Broadcom 同時服務兩家最重要的 AI 需求方，市場壁壘極高。</li>
+                                <li><strong>Anthropic 財務實力：</strong> 同日公布年化營收突破 300 億美元（三個月內從 90 億翻三倍），企業客戶中逾 1,000 家年支出超過 100 萬美元，財務實力背書算力承諾可行性。</li>
+                                <li><strong>台積電連動：</strong> Google Ironwood TPU v7 採用 3 奈米製程，製造仍依賴台積電，此協議直接鞏固台積電的先進製程訂單能見度。</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">🎯 產業連動與標的 (Impact Analysis)</div>
+                            <div class="impact-container">
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] Broadcom (AVGO)</span><span class="impact-tickers">AVGO</span></div>
+                                    <p class="impact-reason">消息公布後盤後上漲 3–6%，Mizuho 估 2027 年 AI 營收達 420 億美元，長期協議至 2031 年大幅提升業績能見度與估值底部。</p>
+                                </div>
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] 台積電與封裝供應鏈</span><span class="impact-tickers">台積電 (2330)、日月光 (3711)</span></div>
+                                    <p class="impact-reason">Ironwood TPU v7 採 3 奈米製程，最終仍需台積電代工，確認台積電 2027 年先進製程產能的高度能見度。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">💡 策略解讀</div>
+                            <div class="strategy-box">
+                                <p class="strategy-text">Broadcom 的 SEC 申報揭示了一個關鍵事實：AI 基礎設施競爭已從「誰有最強模型」演進為「誰能鎖定未來十年的算力供應鏈」。值得注意的是，文件中有一句話透露風險：「Anthropic 的算力消耗取決於其持續的商業成功」——這意味著即使是最大的 AI 算力協議，仍與商業模式的可持續性掛勾。對金融機構的投資團隊而言，評估 AI 基礎設施股票（Broadcom、台積電）的核心邏輯，應從「模型算力需求是否持續增長」出發，而本週 Anthropic 年化營收突破 300 億的數據，正是這個邏輯的最強實證。</p>
+                            </div>
+                        </div>
+                        <a href="https://www.cnbc.com/2026/04/06/broadcom-agrees-to-expanded-chip-deals-with-google-anthropic.html" target="_blank" class="read-source-btn">閱讀原始文章 ↗</a>
+                    </div>
+
+                    <div id="tab-7" class="tab-content">
+                        <div class="detail-header">
+                            <h2 class="detail-title">全美首例》緬因州擬禁建大型資料中心，AI 太耗電民怨沸騰</h2>
+                            <div class="tags"><span class="tag">#監管合規</span><span class="tag">#AI能源</span><span class="tag">#資料中心</span><span class="tag">#政策風險</span></div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">⚡ 重點速報</div>
+                            <div class="highlight-box">美國緬因州議會提出法案，擬對大型 AI 資料中心實施暫停令，成為全美首個試圖以立法禁制資料中心大型建設的州。主要推力來自居民對電網穩定性、電費暴漲、用水消耗及土地利用的強烈抗議，凸顯 AI 算力擴張與在地民眾生活品質之間日趨尖銳的矛盾。</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">📊 關鍵細節</div>
+                            <ul class="detail-list">
+                                <li><strong>能源衝突加劇：</strong> 資料中心的電力需求正與一般居民、傳統工業及再生能源轉型計畫直接競爭，在電網基礎設施老舊的緬因州引發強烈反彈。</li>
+                                <li><strong>全國先例效應：</strong> 若緬因州成功立法，將為其他電力緊張的州（包含部分 AI 建設熱點）提供立法範本，資料中心選址風險大幅提升。</li>
+                                <li><strong>科技巨頭的選址策略受影響：</strong> Microsoft、Google、Amazon 等正在積極評估美國各州的資料中心擴建計畫，此類法案將迫使它們更仔細評估政治與民意風險。</li>
+                                <li><strong>OpenAI 白皮書時間點：</strong> 此事件恰與 OpenAI 提出 AI 稅政策白皮書同週，顯示 AI 的社會壓力正在多個維度同步爆發。</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">🎯 產業連動與標的 (Impact Analysis)</div>
+                            <div class="impact-container">
+                                <div class="impact-row risk">
+                                    <div class="impact-meta"><span class="impact-industry">[風險] 美國資料中心 REITs 與基建業者</span><span class="impact-tickers">Digital Realty, Equinix</span></div>
+                                    <p class="impact-reason">若此類法案蔓延至更多州，資料中心選址成本與時程將大幅增加，影響 AI 算力擴張速度，進直而衝擊相關 REITs 的成長預期。</p>
+                                </div>
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] 台灣與友好國家的算力選址</span><span class="impact-tickers">中華電信、台灣大哥大</span></div>
+                                    <p class="impact-reason">美國資料中心面臨政治阻力，反而強化亞太地區友好國家（含台灣）作為替代算力基地的吸引力，本土電信業者的機房及雲端業務可望受惠。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">💡 策略解讀</div>
+                            <div class="strategy-box">
+                                <p class="strategy-text">緬因州禁令代表的不只是一個州的個案，而是全球 AI 算力擴張面臨「在地政治阻力」的縮影。對台灣金融機構而言，這個新聞有一個正向的隱含邏輯：當美國、歐洲的資料中心建設受到愈來愈多政治阻力，台灣穩定的電力基建（儘管有其挑戰）、強健的半導體供應鏈生態，以及相對友好的監管環境，反而成為境外 AI 業者選擇落地的吸引力因素。數位金融部門應密切追蹤國際 AI 業者來台設點或落地的進展，提前評估相關合作與資料主權安排。</p>
+                            </div>
+                        </div>
+                        <a href="https://www.blocktempo.com/maine-first-state-ban-large-data-centers-ai-electricity-moratorium/" target="_blank" class="read-source-btn">閱讀原始文章 ↗</a>
+                    </div>
+
+                    <div id="tab-8" class="tab-content">
+                        <div class="detail-header">
+                            <h2 class="detail-title">OpenAI完成1220億美元融資，估值達8520億美元，創下史上最大AI融資</h2>
+                            <div class="tags"><span class="tag">#資金流動</span><span class="tag">#OpenAI</span><span class="tag">#史上最大融資</span><span class="tag">#IPO倒數</span></div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">⚡ 重點速報</div>
+                            <div class="highlight-box">OpenAI 完成史上規模最大的科技企業融資，總計 1,220 億美元，投後估值達 8,520 億美元。三大領投方為 Amazon（500 億，其中 350 億與 IPO 或 AGI 里程碑掛鉤）、NVIDIA（300 億）、SoftBank（300 億），並首度開放個人投資者透過銀行渠道參與，籌得額外 30 億美元。ARK Invest 旗下多支 ETF 宣布納入 OpenAI，為 IPO 鋪路。</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">📊 關鍵細節</div>
+                            <ul class="detail-list">
+                                <li><strong>Amazon 條件投資：</strong> Amazon 500 億中有 350 億與 IPO 或達成 AGI 技術里程碑掛鉤，代表 OpenAI 的 IPO 預期已被最大投資方視為「幾乎確定」的事件。</li>
+                                <li><strong>NVIDIA 戰略卡位：</strong> NVIDIA 以 300 億投資直接競爭的模型公司，顯示晶片廠商正透過股權投資確保在 AI 價值鏈的全面覆蓋，而非僅依賴硬體銷售。</li>
+                                <li><strong>財務數據：</strong> OpenAI 年化營收達 250 億美元，月收入 20 億美元，企業客戶佔比已超過 40%，GPT-5.4 帶動代理工作流程使用量創新高，Codex 每週用戶超過 200 萬。</li>
+                                <li><strong>IPO 目標：</strong> 2026 年 Q4 IPO，目標估值 1 兆美元，但需面臨 Sam Altman 治理爭議（《紐約客》深度調查）以及 Anthropic 快速追趕的競爭壓力。</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">🎯 產業連動與標的 (Impact Analysis)</div>
+                            <div class="impact-container">
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] AI 主題 ETF 與相關指數基金</span><span class="impact-tickers">ARK Invest ETF、相關 AI 主題基金</span></div>
+                                    <p class="impact-reason">ARK Invest 宣布旗下 ETF 納入 OpenAI，在 IPO 前即為投資人提供間接曝險管道，預計帶動 AI 主題基金的申購潮。</p>
+                                </div>
+                                <div class="impact-row risk">
+                                    <div class="impact-meta"><span class="impact-industry">[風險] 中小型 AI 新創的融資空間</span><span class="impact-tickers">VC 早期標的</span></div>
+                                    <p class="impact-reason">OpenAI 的超級融資吸走市場大量流動性，在其 IPO 前後幾週，中小型 AI 新創的融資競爭將更為激烈，估值面臨下修壓力。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">💡 策略解讀</div>
+                            <div class="strategy-box">
+                                <p class="strategy-text">1,220 億美元的融資是一個「資本信心宣言」，但其背後的結構細節更值得深讀：Amazon 350 億的條件投資意味著全球最大雲端業者已用真金白銀押注 OpenAI 的 IPO 或 AGI 達成。對金融機構的資產管理部門而言，現在正是啟動「OpenAI IPO 前置研究」的最佳時機——包括評估其財務結構（250 億年化營收 vs 巨額虧損）、治理風險（《紐約客》報導揭露的董事會矛盾）、及與 Anthropic 的競爭消長（Anthropic 年化 300 億美元已超越 OpenAI 的 250 億）。AI 巨頭的 IPO 將是 2026-2027 年全球資本市場的重大事件，早期研究將是競爭優勢的來源。</p>
+                            </div>
+                        </div>
+                        <a href="https://www.ithome.com.tw/news/174821" target="_blank" class="read-source-btn">閱讀原始文章 ↗</a>
+                    </div>
+
+                    <div id="tab-9" class="tab-content">
+                        <div class="detail-header">
+                            <h2 class="detail-title">Google DeepMind 發布 Gemma 4：開源旗艦，首採 Apache 2.0 商用授權</h2>
+                            <div class="tags"><span class="tag">#Google DeepMind</span><span class="tag">#開源模型</span><span class="tag">#Apache 2.0</span><span class="tag">#企業部署</span></div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">⚡ 重點速報</div>
+                            <div class="highlight-box">Google DeepMind 發布 Gemma 4 系列，共四種尺寸（E2B、E4B、26B MoE、31B Dense），首次採用 Apache 2.0 完全商用授權，移除過去的使用者上限與接受使用政策限制。旗艦 31B 模型在 Arena AI 文字排行榜位居第 3，AIME 2026 數學測試從 20.8% 躍升至 89.2%，支援 140 種以上語言，128K–256K 上下文視窗，可在手機端至 H100 GPU 的廣泛硬體上運行。</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">📊 關鍵細節</div>
+                            <ul class="detail-list">
+                                <li><strong>Apache 2.0 授權的商業意涵：</strong> 企業可自由商用、修改、再發布，無需向 Google 支付授權費，消除過去企業採用的最大法律顧慮，為私有化部署鋪平道路。</li>
+                                <li><strong>數學與推理能力躍升：</strong> AIME 2026 測試從 Gemma 3 的 20.8% 跳至 89.2%、LiveCodeBench 程式碼從 29.1% 至 80.0%，顯示從上一代到本代的質量飛躍。</li>
+                                <li><strong>邊緣運算優化：</strong> E2B 模型可在 1.5GB 記憶體內運行，支援手機 NPU 加速（Qualcomm Dragonwing IQ8），在 4,000 tokens 輸入場景下 3 秒內完成，真正實現離線 AI。</li>
+                                <li><strong>代理工作流程原生支援：</strong> 原生支援函數調用（Function Calling）、結構化 JSON 輸出、系統指令，使其成為構建 AI 代理的理想基礎，直接瞄準 Anthropic Claude 的企業市場。</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">🎯 產業連動與標的 (Impact Analysis)</div>
+                            <div class="impact-container">
+                                <div class="impact-row benefit">
+                                    <div class="impact-meta"><span class="impact-industry">[受惠] 地端 AI 部署服務商與系統整合商</span><span class="impact-tickers">精誠、凌群、叡揚資訊</span></div>
+                                    <p class="impact-reason">Apache 2.0 授權消除法律障礙，企業私有化部署 Gemma 4 的意願將大幅提升，帶動本土系統整合商在金融機構的地端 AI 部署專案。</p>
+                                </div>
+                                <div class="impact-row risk">
+                                    <div class="impact-meta"><span class="impact-industry">[風險] 依賴付費 AI API 的中小型新創</span><span class="impact-tickers">商業模式受衝擊的 AI SaaS 業者</span></div>
+                                    <p class="impact-reason">Gemma 4 的強大免費能力將壓縮中間層 AI 工具業者的定價空間，尤其是提供文件摘要、翻譯、程式輔助等通用功能的 SaaS 新創。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="section-label">💡 策略解讀</div>
+                            <div class="strategy-box">
+                                <p class="strategy-text">Apache 2.0 授權是 Gemma 4 最具戰略意義的決策。Google 用「完全免費的商用授權」換取的，是 Gemma 生態系的快速擴散——目前已有超過 10 萬個變體模型，4 億次下載。對台灣金融機構而言，Gemma 4 的出現直接回應了金管會「資料不出境」的核心痛點：一個能在本機 GPU 甚至高階手機上跑的旗艦級開源模型，意味著金融機構可以用數位部數算力池 + Gemma 4 + 本土金融訓練資料，合規且低成本地打造專屬金融大模型。IT 與數位部門應立即啟動 Gemma 4 的 PoC（概念驗證）評估，特別是在法遵文件分析、研究報告生成、內部知識問答等高頻使用場景。</p>
+                            </div>
+                        </div>
+                        <a href="https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/" target="_blank" class="read-source-btn">閱讀原始文章 ↗</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-competitor" class="view-section">
+        <header>
+            <h1>Global Financial AI Watch</h1>
+            <div class="subtitle">追蹤期間：2025/09 - 2026/04</div>
+        </header>
+
+        <div class="filter-section">
+            <div class="filter-row">
+                <span class="filter-label">📅 月份</span>
+                <select id="monthFilter" class="filter-select" onchange="filterCards()">
+                    <option value="all">全部月份</option>
+                    <option value="2026-04">2026 年 4 月</option>
+                    <option value="2026-03">2026 年 3 月</option>
+                    <option value="2026-02">2026 年 2 月</option>
+                    <option value="2026-01">2026 年 1 月</option>
+                    <option value="2025-12">2025 年 12 月</option>
+                    <option value="2025-11">2025 年 11 月</option>
+                    <option value="2025-10">2025 年 10 月</option>
+                    <option value="2025-09">2025 年 9 月</option>
+                </select>
+            </div>
+            <div class="filter-row">
+                <span class="filter-label">🏦 同業</span>
+                <select id="companyFilter" class="filter-select" onchange="filterCards()">
+                    <option value="all">全部同業</option>
+                    <option value="esun">玉山銀行</option>
+                    <option value="kgi">凱基金控</option>
+                    <option value="fsc">行政院 / 金管會</option>
+                    <option value="sinopac">永豐金</option>
+                    <option value="taiwan-life">台灣人壽</option>
+                    <option value="cathay">國泰金控</option>
+                    <option value="taishin">台新銀行</option>
+                    <option value="fubon">富邦金控</option>
+                    <option value="ctbc">中國信託</option>
+                    <option value="life-insurers">六大壽險</option>
+                    <option value="jpmorgan">J.P. Morgan</option>
+                    <option value="hsbc">HSBC</option>
+                    <option value="pismo">Pismo & Vivi Money</option>
+                    <option value="factset">FactSet × ComplyAdvantage</option>
+                    <option value="bridgewise">BridgeWise</option>
+                    <option value="mastercard">Mastercard & Santander</option>
+                    <option value="b1bank">b1Bank</option>
+                    <option value="dbs-visa">DBS & Visa</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="wellsfargo">Wells Fargo</option>
+                    <option value="danske">Danske Bank</option>
+                    <option value="goldman">Goldman Sachs</option>
+                    <option value="dbs">DBS Bank</option>
+                    <option value="stripe">Stripe</option>
+                    <option value="mckinsey">McKinsey</option>
+                    <option value="mas-fca">MAS & FCA</option>
+                    <option value="robinhood">Robinhood</option>
+                    <option value="visa">Visa</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="competitor-tabs" id="competitorTabs">
+            <button class="ctab active" onclick="switchCompetitorTab('tw')">🇹🇼 台灣</button>
+            <button class="ctab" onclick="switchCompetitorTab('global')">🌏 國際</button>
+        </div>
+
+        <div class="container">
+            <div class="columns-wrapper">
+
+                <div class="column tw-col">
+                    <div class="col-header tw-header">🇹🇼 台灣市場 (Taiwan)</div>
+
+                    <div class="card" data-date="2026-04" data-company="fsc">
+                        <div class="meta-row"><span class="date-badge">2026/04/01</span><span>Taipei</span></div>
+                        <span class="company">FSC 金融監督管理委員會</span>
+                        <h3 class="product-title">金融業 AI 導入率達 41.8%，金管會公布六大核心原則</h3>
+                        <p class="user-case">勞動部揭露金融業 AI 導入比率高達 41.8%，為各產業最高，銀行業使用率更達 87%。金管會副主委表示 AI 不應取代人力，應走向人機協作，同時提出六項核心原則及八項配套政策，強調金融機構導入 AI 時須確保消費者權益保護、隱私與風險管理。</p>
+                        <div class="insight-box">
+                            <span class="insight-title">💡 監管即機遇</span>
+                            <p class="insight-text">金管會的六大原則等同為金融業 AI 導入劃下合規底線，率先符合規範的機構將取得監管信任背書，在爭取創新業務試辦資格時擁有先行優勢，合規本身將成為數位金融的競爭護城河。</p>
+                        </div>
+                        <a href="https://money.udn.com/money/story/5613/9398372" target="_blank" class="source-link">Source: 經濟日報</a>
+                    </div>
+
+                    <div class="card" data-date="2026-04" data-company="fsc">
+                        <div class="meta-row"><span class="date-badge">2026/04/06</span><span>Taipei</span></div>
+                        <span class="company">台灣新創生態系</span>
+                        <h3 class="product-title">2026 Q1 台灣新創大盤點：14 件重大事件，64% 與 AI 直接相關</h3>
+                        <p class="user-case">2026 年 Q1 台灣新創生態系共發生 14 件值得關注的重大事件，涵蓋募資、策略入股、上市興櫃與併購，累計可計金額逾 13 億新台幣。其中 9 件（64%）與 AI 直接相關，涵蓋算力基礎設施、企業私有小模型、AI PC、AI 資安到餐飲 AI 導入，顯示台灣 AI 新創正快速融入全球 AI 供應鏈。</p>
+                        <div class="insight-box">
+                            <span class="insight-title">💡 生態系成熟訊號</span>
+                            <p class="insight-text">64% 的新創事件與 AI 直接掛鉤，且多數深入基礎設施層，這不是 AI 泡沫的徵兆，而是台灣科技生態系正在發生結構性轉型的明確訊號，數位金融部門應持續觀察這些新創的 B2B 應用潛力。</p>
+                        </div>
+                        <a href="https://www.bnext.com.tw/article/90527/2026-q1-taiwan-startups" target="_blank" class="source-link">Source: 數位時代</a>
+                    </div>
+
+                    <div class="card" data-date="2026-03" data-company="esun">
+                        <div class="meta-row"><span class="date-badge">2026/03/12</span><span>Taipei</span></div>
+                        <span class="company">E.Sun Bank × IBM（玉山銀行）</span>
+                        <h3 class="product-title">玉山銀行攜手 IBM 建立領先台灣業界的企業級 AI 治理框架</h3>
+                        <p class="user-case">玉山銀行與 IBM 合作，導入企業級 AI 治理平台，針對 AI 模型的透明度、公平性與合規性建立系統性管理框架，為台灣金融業樹立 AI 治理標竿。</p>
+                        <div class="insight-box"><span class="insight-title">💡 治理先機</span>
+                            <p class="insight-text">AI 治理框架不只是風控工具，更是搶占監管信任的戰略資本。率先建立可稽核 AI 體系的銀行，將在金管會未來的 AI 監理浪潮中取得絕對優勢地位。</p>
+                        </div>
+                        <a href="https://www.esunbank.com/zh-tw/about/news/press/2026031201" target="_blank" class="source-link">Source: 玉山銀行</a>
+                    </div>
+
+                    <div class="card" data-date="2026-02" data-company="kgi">
+                        <div class="meta-row"><span class="date-badge">2026/02/18</span><span>Taipei</span></div>
+                        <span class="company">KGI Securities（凱基金控）</span>
+                        <h3 class="product-title">凱基推出 AI 智能選股助理「Kay」，整合多模態分析提升投顧效率</h3>
+                        <p class="user-case">凱基證券推出 AI 投顧助理 Kay，整合技術分析、籌碼動向、個股新聞等多維度資料，以自然語言互動協助客戶篩選投資機會，提升顧問人員服務效率並降低研究門檻。</p>
+                        <div class="insight-box"><span class="insight-title">💡 輔助決策升級</span>
+                            <p class="insight-text">AI 投顧工具的核心競爭力不在「取代顧問」，而在「放大顧問影響力」。能讓一位顧問同時服務更多客戶、提供更即時深入的分析，才是 AI 在財管業的正確定位。</p>
+                        </div>
+                        <a href="https://www.kgieworld.com.tw/Web/News/2026021801" target="_blank" class="source-link">Source: 凱基證券</a>
+                    </div>
+
+                    <div class="card" data-date="2025-10" data-company="sinopac">
+                        <div class="meta-row"><span class="date-badge">2025/09/30</span><span>Taipei</span></div>
+                        <span class="company">SinoPac Securities（永豐金）</span>
+                        <h3 class="product-title">永豐金證券推出「豐搜」AI 選股工具</h3>
+                        <p class="user-case">推出進化版「豐搜」，利用 AI 捕捉熱門股關鍵字與投資訊號，讓投資人主動發現市場趨勢。</p>
+                        <div class="insight-box"><span class="insight-title">💡 資訊賦能</span>
+                            <p class="insight-text">在資訊爆炸時代，券商價值在於「過濾」。誰能幫客戶節省研究時間，誰就能贏得交易量。</p>
+                        </div>
+                        <a href="https://securities.sinopac.com/seNews/20250930143229881000000000000296.html" target="_blank" class="source-link">Source: 永豐金證券</a>
+                    </div>
+
+                    <div class="card" data-date="2025-09" data-company="fsc">
+                        <div class="meta-row"><span class="date-badge">2025/09/02</span><span>Taipei</span></div>
+                        <span class="company">FSC (金管會)</span>
+                        <h3 class="product-title">金融專用 AI 大語言模型</h3>
+                        <p class="user-case">推動開發合規、懂金融術語的「公版」大語言模型，降低中小型機構導入 AI 的門檻。</p>
+                        <div class="insight-box"><span class="insight-title">💡 基建共享</span>
+                            <p class="insight-text">當大模型成為公共財，金融機構的競爭將轉移到「應用層創新」與「客戶體驗設計」。</p>
+                        </div>
+                        <a href="https://money.udn.com/money/story/5613/8977371" target="_blank" class="source-link">Source: 經濟日報</a>
+                    </div>
+
+                </div>
+
+                <div class="column global-col">
+                    <div class="col-header global-header">🌏 國際市場 (Global)</div>
+
+                    <div class="card" data-date="2026-04" data-company="jpmorgan">
+                        <div class="meta-row"><span class="date-badge">2026/04/08</span><span>USA</span></div>
+                        <span class="company">JPMorgan Chase（摩根大通）</span>
+                        <h3 class="product-title">JPMorgan CEO 戴蒙年度股東信：AI 改變銀行業速度將超越網際網路</h3>
+                        <p class="user-case">JPMorgan CEO Jamie Dimon 在 2026 年度股東信中宣告，AI 對銀行業的衝擊將比網際網路更快、更深遠。摩根大通 2026 年科技預算達 200 億美元，近四分之一直接用於 AI，內部 AI 解決方案數量 2025 年已倍增，數萬名員工每週使用 AI 工具協助法律文件分析、風險評估與市場研究，並已啟動對公業務的 AI 代理應用試點。</p>
+                        <div class="insight-box">
+                            <span class="insight-title">💡 高層宣示即戰略</span>
+                            <p class="insight-text">全球最大金融機構 CEO 在年度股東信中將 AI 列為核心敘事，代表 AI 轉型已從「科技實驗」正式升格為「企業戰略核心」。台灣金融機構的高管若尚未在公開場合發表類似的 AI 戰略宣示，將在市場競爭定位上落後一個身位。</p>
+                        </div>
+                        <a href="https://mindcron.com/jpmorgan-ai-banking-transformation/" target="_blank" class="source-link">Source: Mindcron</a>
+                    </div>
+
+                    <div class="card" data-date="2026-04" data-company="jpmorgan">
+                        <div class="meta-row"><span class="date-badge">2026/04/07</span><span>Global</span></div>
+                        <span class="company">Legora（AI 法律科技新創）</span>
+                        <h3 class="product-title">Legora 完成 5.5 億美元 D 輪融資，估值達 55 億美元，AI 法律研究平台攻入金融合規市場</h3>
+                        <p class="user-case">法律 AI 新創 Legora 完成 5.5 億美元 D 輪融資，估值達 55 億美元，由 Insight Partners、Index Ventures 等頂級 VC 領投。平台提供 AI 驅動的法律研究、合約審查與法規判讀服務，已被多家金融機構採用於法遵部門的效率提升，將人工法律研究時間縮短達 70%。</p>
+                        <div class="insight-box">
+                            <span class="insight-title">💡 法遵自動化商機</span>
+                            <p class="insight-text">Legora 的高估值反映市場對「AI 法遵工具」的強勁需求。台灣金融機構的法遵部門每年投入大量人力處理法規異動追蹤與合約審查，此類工具的本地化版本（繁體中文、本土法規）是尚待開發的藍海。</p>
+                        </div>
+                        <a href="https://www.crescendo.ai/news/latest-vc-investment-deals-in-ai-startups" target="_blank" class="source-link">Source: Crescendo AI</a>
+                    </div>
+
+                    <div class="card" data-date="2026-04" data-company="mas-fca">
+                        <div class="meta-row"><span class="date-badge">2026/04/01</span><span>Europe</span></div>
+                        <span class="company">European Union AI Act</span>
+                        <h3 class="product-title">歐盟 AI Act 高風險系統規範正式進入執行期，金融業首當其衝</h3>
+                        <p class="user-case">歐盟 AI Act 於 2026 年進入全面執行期，對信用評分、保險核保、招募篩選等金融高風險 AI 系統實施強制義務：包含風險管理系統建置、詳細技術文件維護、人類監督機制及高精準度要求。歐洲 AI 辦公室已開始進行稽核，違規罰款最高可達全球年營收 7%。</p>
+                        <div class="insight-box">
+                            <span class="insight-title">💡 法遵壓力即機遇</span>
+                            <p class="insight-text">歐盟 AI Act 的強制執行為全球金融業設立了最高標準，台灣雖非直接適用，但跨國業務或與歐盟機構往來的台灣金融機構，必須提前對齊。提早建立符合 EU AI Act 的 AI 治理框架，將成為開展歐洲業務的隱性通行證。</p>
+                        </div>
+                        <a href="https://www.crowdstrike.com/en-us/blog/crowdstrike-founding-member-anthropic-mythos-frontier-model-to-secure-ai/" target="_blank" class="source-link">Source: CrowdStrike</a>
+                    </div>
+
+                    <div class="card" data-date="2026-03" data-company="hsbc">
+                        <div class="meta-row"><span class="date-badge">2026/03/24</span><span>Global</span></div>
+                        <span class="company">HSBC</span>
+                        <h3 class="product-title">HSBC appoints David Rice as its inaugural chief AI officer</h3>
+                        <p class="user-case">滙豐銀行（HSBC）宣布任命 David Rice 為首任人工智慧長（Chief AI Officer）。這項全新的高管職位將專責統籌全集團的 AI 戰略發展與風險治理，確保 AI 技術能安全、合規且高效地嵌入全球各地的金融業務流程中。</p>
+                        <div class="insight-box">
+                            <span class="insight-title">💡 戰略入魂</span>
+                            <p class="insight-text">設立 C-level 的 AI 專責高管，宣告 AI 已從 IT 附屬功能正式晉升為驅動獲利的核心引擎。這將為跨國金控的 AI 資源分配與合規調度定下新標準。</p>
+                        </div>
+                        <a href="https://www.fintechfutures.com/job-cuts-new-hires/hsbc-appoints-david-rice-as-its-inaugural-chief-ai-officer" target="_blank" class="source-link">Source: Fintech Futures</a>
+                    </div>
+
+                    <div class="card" data-date="2026-03" data-company="pismo">
+                        <div class="meta-row"><span class="date-badge">2026/03/22</span><span>Global</span></div>
+                        <span class="company">Pismo & Vivi Money</span>
+                        <h3 class="product-title">Pismo to power Vivi Money's AI-driven financial platform</h3>
+                        <p class="user-case">雲端原生核心銀行與支付平台 Pismo 獲 Vivi Money 選用，為其打造全新的 AI 驅動金融服務平台。透過 Pismo 的彈性底層架構，Vivi Money 能更無縫地整合機器學習與 AI 模組，提供高度客製化的動態信用評分與智慧理財建議。</p>
+                        <div class="insight-box">
+                            <span class="insight-title">💡 底層煥新</span>
+                            <p class="insight-text">要發揮 AI 的最大潛力，銀行必須擁有輕量、API 原生的核心系統。Pismo 的案例證明，唯有斬斷傳統笨重的 IT 包袱，AI 才能真正落地並快速變現。</p>
+                        </div>
+                        <a href="https://www.fintechfutures.com/core-banking-technology/pismo-to-power-vivi-money-s-ai-driven-financial-platform" target="_blank" class="source-link">Source: Fintech Futures</a>
+                    </div>
+
+                    <div class="card" data-date="2026-03" data-company="factset">
+                        <div class="meta-row"><span class="date-badge">2026/03/17</span><span>Global</span></div>
+                        <span class="company">FactSet × ComplyAdvantage</span>
+                        <h3 class="product-title">FactSet, ComplyAdvantage boost bank onboarding speed</h3>
+                        <p class="user-case">FactSet 與 ComplyAdvantage 宣布策略合作，將 AI 驅動的 KYC/AML 合規風控功能深度嵌入 FactSet Workstation 平台，讓企業銀行關係經理（RM）可在單一介面完成客戶開發、風險評估、AML 審核到開戶執行的完整工作流程。AI 可自動化 80% 的 KYC/AML 審查步驟、縮短開戶時間達 50%、降低誤報率達 70%，直接壓縮法遵人力成本並加速業務轉換速度。</p>
+                        <div class="insight-box">
+                            <span class="insight-title">💡 法遵加速器</span>
+                            <p class="insight-text">這個案例完美展示了「合規嵌入前台工作流」的典範——法遵不再是業務的阻力，而是速度的加速器。台灣對公銀行的 RM 每天切換多個系統、手動填寫 KYC 表格的痛點，與此案例高度重疊，值得評估引入類似整合方案以提升對公業務效率。</p>
+                        </div>
+                        <a href="https://fintech.global/2026/03/17/factset-complyadvantage-boost-bank-onboarding-speed/" target="_blank" class="source-link">Source: Fintech Global</a>
+                    </div>
+
+                    <div class="card" data-date="2026-03" data-company="jpmorgan">
+                        <div class="meta-row"><span class="date-badge">2026/03/11</span><span>USA</span></div>
+                        <span class="company">J.P. Morgan Payments × Mirakl</span>
+                        <h3 class="product-title">J.P. Morgan Payments and Mirakl Strike Up Agentic Commerce Pact</h3>
+                        <p class="user-case">J.P. Morgan Payments 與電商軟體商 Mirakl 宣布合作，結合 Mirakl 的 Nexus 代理商務解決方案與 J.P. Morgan 的企業支付基礎設施，為 AI 代理人代表消費者執行交易提供安全支付處理、Token 化與詐欺防護。J.P. Morgan 強調，AI 代理商務時代的差異化關鍵在於治理：身分驗證、使用者授權框架與跨境互通性。</p>
+                        <div class="insight-box">
+                            <span class="insight-title">💡 支付基礎戰</span>
+                            <p class="insight-text">當消費者的 AI 代理人開始自主購物、投資、轉帳，金融機構爭奪的不再是「人類用戶介面」的黏著度，而是「代理人信任基礎設施」的標準制定權。誰的支付基礎設施能被 AI 代理人信賴並優先呼叫，誰就掌握了下一代金融生態系的閘道。</p>
+                        </div>
+                        <a href="https://www.pymnts.com/artificial-intelligence-2/2026/jpmorgan-payments-and-mirakl-form-agentic-commerce-pact/" target="_blank" class="source-link">Source: PYMNTS.com</a>
+                    </div>
+
+                    <div class="card" data-date="2026-03" data-company="bridgewise">
+                        <div class="meta-row"><span class="date-badge">2026/03/05</span><span>Global</span></div>
+                        <span class="company">BridgeWise</span>
+                        <h3 class="product-title">金融 AI 領袖強強聯手：BridgeWise 收購美國 Context Analytics</h3>
+                        <p class="user-case">知名金融 AI 新創 BridgeWise 宣布收購美國 Context Analytics，旨在打造端到端、財富原生智能的投資平台，提供涵蓋基本面、情緒面與自動化報告的一站式解決方案。</p>
+                        <div class="insight-box"><span class="insight-title">💡 垂直整合</span>
+                            <p class="insight-text">AI 財管平台的競爭已進入「併購補強」階段。數位部門在規劃升級時，應關注這類提供模組化洞察的供應商，以加速投顧報告的整合。</p>
+                        </div>
+                        <a href="https://money.udn.com/money/story/123828/9340566" target="_blank" class="source-link">Source: 經濟日報</a>
+                    </div>
+
+                    <div class="card" data-date="2026-03" data-company="mastercard">
+                        <div class="meta-row"><span class="date-badge">2026/03/05</span><span>Europe</span></div>
+                        <span class="company">Mastercard & Santander</span>
+                        <h3 class="product-title">Mastercard and Santander complete Europe's first live AI agent payment</h3>
+                        <p class="user-case">萬事達卡與桑坦德銀行攜手完成了歐洲首筆「實時 AI 代理支付」。透過 Agentic AI 技術，授權機器代理人自主完成身份驗證與資金轉帳流程。</p>
+                        <div class="insight-box"><span class="insight-title">💡 典範轉移</span>
+                            <p class="insight-text">支付授權從「人對機」轉為「機對機」。理財 APP 未來的設計必須提供 API，讓客戶專屬的 AI 代理能自動執行定期定額與市場套利。</p>
+                        </div>
+                        <a href="https://www.fintechfutures.com/ai-in-fintech/mastercard-santander-complete-agentic-payment" target="_blank" class="source-link">Source: Fintech Futures</a>
+                    </div>
+
+                    <div class="card" data-date="2026-02" data-company="b1bank">
+                        <div class="meta-row"><span class="date-badge">2026/02/25</span><span>USA</span></div>
+                        <span class="company">b1Bank</span>
+                        <h3 class="product-title">導入 Covecta AI 代理</h3>
+                        <p class="user-case">美國社區銀行 b1Bank 宣布導入 Covecta 的 AI 代理技術，旨在自動化後勤流程與強化客戶服務體驗，顯示中小型銀行正積極利用 Agentic AI 縮小與大型金控的數位落差。</p>
+                        <div class="insight-box"><span class="insight-title">💡 規模化平權</span>
+                            <p class="insight-text">AI 代理技術大幅降低了數位轉型的門檻。對於區域型銀行或中小型券商而言，這是彎道超車、提供媲美頂級財管服務的絕佳武器。</p>
+                        </div>
+                        <a href="https://www.fintechfutures.com/bankingtech/b1bank-implements-covecta-ai-agents" target="_blank" class="source-link">Source: Fintech Futures</a>
+                    </div>
+
+                    <div class="card" data-date="2026-02" data-company="dbs-visa">
+                        <div class="meta-row"><span class="date-badge">2026/02/22</span><span>APAC</span></div>
+                        <span class="company">DBS & Visa</span>
+                        <h3 class="product-title">亞太區代理人商務試點</h3>
+                        <p class="user-case">星展銀行與 Visa 合作，在亞太地區推進「代理人商務（Agentic Commerce）」試點，允許 AI 代理人代表消費者與商家進行自主交易與支付授權，無需人工每步干預。</p>
+                        <div class="insight-box"><span class="insight-title">💡 自主交易</span>
+                            <p class="insight-text">未來的數位金融場景中，APP 的使用者可能不再是「人」，而是客戶專屬的「AI 理財代理」，這將徹底顛覆現有理財平台的 UI/UX 與身分驗證機制。</p>
+                        </div>
+                        <a href="https://www.fintechfutures.com/partnerships/dbs-and-visa-collaborate-to-advance-agentic-commerce-trials-in-asia-pacific" target="_blank" class="source-link">Source: Fintech Futures</a>
+                    </div>
+
+                    <div class="card" data-date="2026-02" data-company="paypal">
+                        <div class="meta-row"><span class="date-badge">2026/02/05</span><span>USA</span></div>
+                        <span class="company">PayPal</span>
+                        <h3 class="product-title">支付 AI 化：收購 Cymbio</h3>
+                        <p class="user-case">PayPal 宣布收購 Cymbio，旨在將 AI 技術更深層次地整合進其支付生態系統，強化自動化商務能力，提升支付流程的效率與智能化體驗。</p>
+                        <div class="insight-box"><span class="insight-title">💡 併購加速</span>
+                            <p class="insight-text">支付巨頭不願從零開發，直接收購成熟的 AI 新創是快速補強技術缺口的最佳途徑，預示 FinTech 領域的整併潮將持續。</p>
+                        </div>
+                        <a href="https://www.fintechfutures.com/ai-in-fintech/paypal-takes-next-step-in-ai-rollout-with-cymbio-acquisition" target="_blank" class="source-link">Source: Fintech Futures</a>
+                    </div>
+
+                    <div class="card" data-date="2026-02" data-company="wellsfargo">
+                        <div class="meta-row"><span class="date-badge">2026/02/04</span><span>Global</span></div>
+                        <span class="company">Wells Fargo (富國銀行)</span>
+                        <h3 class="product-title">AI 高層佈局：前 AWS 高管加盟</h3>
+                        <p class="user-case">富國銀行延攬前 AWS 高管 Faraz Shafiq 擔任 AI 主管，顯示傳統銀行正積極引入科技巨頭的 DNA，意在加速內部 AI 創新，將雲端思維與金融業務深度結合。</p>
+                        <div class="insight-box"><span class="insight-title">💡 人才混血</span>
+                            <p class="insight-text">金融業的 AI 轉型需要「科技腦」。引入雲端大廠的高管，能有效打破傳統銀行的僵化思維，加速技術落地的速度。</p>
+                        </div>
+                        <a href="https://www.fintechfutures.com/job-cuts-new-hires/wells-fargo-hires-faraz-shafiq-as-head-of-ai" target="_blank" class="source-link">Source: Fintech Futures</a>
+                    </div>
+
+                    <div class="card" data-date="2026-02" data-company="danske">
+                        <div class="meta-row"><span class="date-badge">2026/02/03</span><span>UK</span></div>
+                        <span class="company">Danske Bank (丹麥銀行)</span>
+                        <h3 class="product-title">任命英國區 AI 主管</h3>
+                        <p class="user-case">丹麥銀行英國分行任命 Fiona Browne 為 AI 主管，反映歐洲銀行業對於 AI 治理與區域性應用的重視，試圖在合規前提下尋求創新。</p>
+                        <div class="insight-box"><span class="insight-title">💡 區域戰略</span>
+                            <p class="insight-text">AI 應用需因地制宜。設立區域級的 AI 負責人，有助於更精準地對接當地法規與客戶需求，避免「水土不服」。</p>
+                        </div>
+                        <a href="https://www.fintechfutures.com/job-cuts-new-hires/danske-bank-uk-appoints-fiona-browne-as-head-of-ai" target="_blank" class="source-link">Source: Fintech Futures</a>
+                    </div>
+
+                    <div class="card" data-date="2026-01" data-company="goldman">
+                        <div class="meta-row"><span class="date-badge">2026/01/07</span><span>USA</span></div>
+                        <span class="company">Goldman Sachs (高盛)</span>
+                        <h3 class="product-title">OneGS 3.0：AI 嵌入核心</h3>
+                        <p class="user-case">啟動 OneGS 3.0，將 AI 嵌入交易與風控流程，自動優化資產配置並生成報告，重塑投行營運系統。</p>
+                        <div class="insight-box"><span class="insight-title">💡 營運升級</span>
+                            <p class="insight-text">AI 成為新一代作業系統（OS）。投行的護城河在於將宏觀數據快速轉化為獲利策略的能力。</p>
+                        </div>
+                        <a href="https://www.nasdaq.com/articles/should-you-buy-goldman-stock-macro-clarity-rekindles-dealmaking" target="_blank" class="source-link">Source: Nasdaq</a>
+                    </div>
+
+                    <div class="card" data-date="2025-12" data-company="dbs">
+                        <div class="meta-row"><span class="date-badge">2025/12/28</span><span>Singapore</span></div>
+                        <span class="company">DBS Bank (星展銀行)</span>
+                        <h3 class="product-title">AI+區塊鏈 獲獎策略</h3>
+                        <p class="user-case">利用 AI 預測現金流結合區塊鏈自動放款，實現「隱形銀行」願景，蟬聯全球最佳銀行。</p>
+                        <div class="insight-box"><span class="insight-title">💡 技術綜效</span>
+                            <p class="insight-text">單一技術非萬能。AI 解決預測問題，區塊鏈解決信任問題，兩者結合才能最大化價值。</p>
+                        </div>
+                        <a href="https://news.cnyes.com/news/id/6280201" target="_blank" class="source-link">Source: 鉅亨網</a>
+                    </div>
+
+                    <div class="card" data-date="2025-12" data-company="stripe">
+                        <div class="meta-row"><span class="date-badge">2025/12/22</span><span>USA</span></div>
+                        <span class="company">Stripe</span>
+                        <h3 class="product-title">Auto-CFO 自動化財務長</h3>
+                        <p class="user-case">透過併購 AI 新創，為中小企業提供現金流預測與庫存建議，模糊了支付與管顧的界線。</p>
+                        <div class="insight-box"><span class="insight-title">💡 跨界掠奪</span>
+                            <p class="insight-text">支付業者向上整合 ERP。銀行企金若不轉型，將面臨被「功能性拆解」的危機。</p>
+                        </div>
+                        <a href="https://www.digitimes.com/news/a20251222PD203.html" target="_blank" class="source-link">Source: Digitimes</a>
+                    </div>
+
+                    <div class="card" data-date="2025-12" data-company="mckinsey">
+                        <div class="meta-row"><span class="date-badge">2025/12/15</span><span>Global</span></div>
+                        <span class="company">McKinsey (麥肯錫)</span>
+                        <h3 class="product-title">AI 代理提升 4% 獲利</h3>
+                        <p class="user-case">報告指出 Agentic AI 為關鍵增長點，在自動化合規與理財建議上，可為金控帶來顯著獲利提升。</p>
+                        <div class="insight-box"><span class="insight-title">💡 價值量化</span>
+                            <p class="insight-text">高層需要 ROI。Agentic AI 能直接貢獻營收與降低成本，是爭取預算的最佳切入點。</p>
+                        </div>
+                        <a href="https://www.bnext.com.tw/article/89618/mckinsey-agentic-ai" target="_blank" class="source-link">Source: 數位時代</a>
+                    </div>
+
+                    <div class="card" data-date="2025-12" data-company="mas-fca">
+                        <div class="meta-row"><span class="date-badge">2025/12/03</span><span>Singapore</span></div>
+                        <span class="company">MAS & FCA</span>
+                        <h3 class="product-title">跨國 Agentic AI 框架</h3>
+                        <p class="user-case">新加坡與英國建立跨境測試環境，確保金融 AI 代理系統符合國際合規與安全標準。</p>
+                        <div class="insight-box"><span class="insight-title">💡 標準制定</span>
+                            <p class="insight-text">當 AI 開始自主交易，跨國監管的互通性將決定金融機構能否進行全球化部署。</p>
+                        </div>
+                        <a href="https://www.mas.gov.sg/news/media-releases/2025/mas-and-uk-fca-announces-partnership-on-ai-in-finance" target="_blank" class="source-link">Source: MAS</a>
+                    </div>
+
+                    <div class="card" data-date="2025-11" data-company="robinhood">
+                        <div class="meta-row"><span class="date-badge">2025/11/18</span><span>New York</span></div>
+                        <span class="company">Robinhood</span>
+                        <h3 class="product-title">AI 驅動預測市場</h3>
+                        <p class="user-case">結合 AI 分析輿情推出預測市場業務，打造高黏著度的新型態博弈投資產品。</p>
+                        <div class="insight-box"><span class="insight-title">💡 新興資產</span>
+                            <p class="insight-text">AI 創造了新的賭局。預測市場是吸引年輕世代（Gen Z）的高頻交易場景。</p>
+                        </div>
+                        <a href="https://money.udn.com/money/story/5618/9146110" target="_blank" class="source-link">Source: 經濟日報</a>
+                    </div>
+
+                    <div class="card" data-date="2025-11" data-company="visa">
+                        <div class="meta-row"><span class="date-badge">2025/11/11</span><span>APAC</span></div>
+                        <span class="company">Visa</span>
+                        <h3 class="product-title">AI 商務代理人</h3>
+                        <p class="user-case">啟動試點，允許消費者的 AI 代理直接與商家 AI 代理溝通並支付，無需人工介入。</p>
+                        <div class="insight-box"><span class="insight-title">💡 機器經濟</span>
+                            <p class="insight-text">支付巨頭轉型為「AI 認證中心」，確保在機器人交易時代仍掌握金流閘口。</p>
+                        </div>
+                        <a href="https://money.udn.com/money/story/5613/9137428" target="_blank" class="source-link">Source: 經濟日報</a>
+                    </div>
+
+                    <div class="card" data-date="2025-09" data-company="visa">
+                        <div class="meta-row"><span class="date-badge">2025/09/30</span><span>Greater China</span></div>
+                        <span class="company">Visa</span>
+                        <h3 class="product-title">AI 防詐與智慧商務</h3>
+                        <p class="user-case">任命新總裁重點推動「AI 防詐」，利用 AI 分析跨境交易模式，強化科技含金量。</p>
+                        <div class="insight-box"><span class="insight-title">💡 科技轉型</span>
+                            <p class="insight-text">支付業競爭已從通路覆蓋率轉向「科技防護力」，安全是最大的賣點。</p>
+                        </div>
+                        <a href="https://money.udn.com/money/story/5612/9037800" target="_blank" class="source-link">Source: 經濟日報</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // View Switching Logic
+        function switchView(viewName) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById('view-' + viewName).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.nav-btn[data-target="view-${viewName}"]`).classList.add('active');
+
+            window.scrollTo(0, 0);
+        }
+
+        // Tab Switching for Weekly View
+        function openTab(tabId) {
+            document.querySelectorAll('.news-item').forEach(el => el.classList.remove('active'));
+            const activeItem = document.querySelectorAll('.news-item')[tabId - 1];
+            if (activeItem) activeItem.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            const activeContent = document.getElementById('tab-' + tabId);
+            if (activeContent) activeContent.classList.add('active');
+        }
+
+        // Jump to News Section
+        function jumpToNews(tabId) {
+            openTab(tabId);
+            const section = document.getElementById('news-section-anchor');
+            if (section) {
+                const yOffset = -70;
+                const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({
+                    top: y,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Filter Logic for Competitor Page
+        function filterCards() {
+            const selectedMonth = document.getElementById('monthFilter').value;
+            const selectedCompany = document.getElementById('companyFilter').value;
+            const cards = document.querySelectorAll('#view-competitor .card');
+
+            cards.forEach(card => {
+                const cardDate = card.getAttribute('data-date') || '';
+                const cardCompany = card.getAttribute('data-company') || '';
+                const monthOk = selectedMonth === 'all' || cardDate === selectedMonth;
+                const companyOk = selectedCompany === 'all' || cardCompany === selectedCompany;
+
+                if (monthOk && companyOk) {
+                    card.classList.remove('hidden');
+                    card.style.display = 'block';
+                } else {
+                    card.classList.add('hidden');
+                    card.style.display = 'none';
+                }
+            });
+
+            // 手機模式：維持目前 tab 狀態
+            if (window.innerWidth <= 768) {
+                const activeTw = document.querySelector('.ctab:first-child').classList.contains('active');
+                switchCompetitorTab(activeTw ? 'tw' : 'global');
+            }
+        }
+
+        // Competitor Tab (mobile only)
+        function switchCompetitorTab(tab) {
+            const tw = document.querySelector('#view-competitor .tw-col');
+            const gl = document.querySelector('#view-competitor .global-col');
+            const btns = document.querySelectorAll('.ctab');
+            if (tab === 'tw') {
+                tw.classList.remove('tab-hidden');
+                gl.classList.add('tab-hidden');
+                btns[0].classList.add('active');
+                btns[1].classList.remove('active');
+            } else {
+                gl.classList.remove('tab-hidden');
+                tw.classList.add('tab-hidden');
+                btns[1].classList.add('active');
+                btns[0].classList.remove('active');
+            }
+        }
+
+        // 初始化：手機預設只顯示台灣欄
+        function initCompetitorTabs() {
+            if (window.innerWidth <= 768) {
+                switchCompetitorTab('tw');
+            } else {
+                // 桌機：兩欄都顯示，移除任何隱藏
+                document.querySelector('#view-competitor .tw-col').classList.remove('tab-hidden');
+                document.querySelector('#view-competitor .global-col').classList.remove('tab-hidden');
+            }
+        }
+        window.addEventListener('resize', initCompetitorTabs);
+        initCompetitorTabs();
+
+        function copyText(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Prompt Copied to Clipboard!");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Analysis Carousel
+        let analysisIndex = 0;
+        const analysisTotalSlides = 3;
+
+        function updateAnalysisCarousel() {
+            const inner = document.getElementById('analysisInner');
+            if (inner) inner.style.transform = `translateX(-${analysisIndex * 100}%)`;
+            document.querySelectorAll('.analysis-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === analysisIndex);
+            });
+        }
+
+        function moveAnalysis(dir) {
+            analysisIndex = Math.max(0, Math.min(analysisTotalSlides - 1, analysisIndex + dir));
+            updateAnalysisCarousel();
+        }
+
+        function goToAnalysis(idx) {
+            analysisIndex = idx;
+            updateAnalysisCarousel();
+        }
+
+        // Touch swipe for carousel
+        (function() {
+            let startX = 0;
+            let startY = 0;
+            let isSwiping = false;
+            const track = document.getElementById('analysisInner');
+            if (!track) return;
+
+            track.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                isSwiping = false;
+            }, { passive: true });
+
+            track.addEventListener('touchmove', e => {
+                // 只在手機 carousel 模式下才需要處理
+                if (window.innerWidth > 600) return;
+                const dx = e.touches[0].clientX - startX;
+                const dy = e.touches[0].clientY - startY;
+                // 若水平位移明顯大於垂直，判定為橫向滑動，阻止頁面滾動
+                if (!isSwiping && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
+                    isSwiping = true;
+                }
+                if (isSwiping) e.preventDefault();
+            }, { passive: false });
+
+            track.addEventListener('touchend', e => {
+                if (window.innerWidth > 600) return;
+                const dx = startX - e.changedTouches[0].clientX;
+                const dy = startY - e.changedTouches[0].clientY;
+                // 水平位移需超過 50px，且水平幅度須大於垂直幅度的 1.5 倍，才觸發切換
+                if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                    moveAnalysis(dx > 0 ? 1 : -1);
+                }
+                isSwiping = false;
+            }, { passive: true });
+        })();
+    </script>
+
+</body>
+
+</html>
